@@ -7,11 +7,10 @@ import Partners from './pages/Partners';
 import About from './pages/About';
 import Settings from './pages/Settings';
 
-
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen bg-black text-white">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -19,7 +18,6 @@ function App() {
           <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<About />} />
           <Route path="/settings" element={<Settings />} />
-
         </Routes>
         <Footer />
       </div>
