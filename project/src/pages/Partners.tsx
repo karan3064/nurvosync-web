@@ -20,8 +20,12 @@ export default function Partners() {
     <div className="min-h-screen bg-white pt-24 pb-12">
 
       {/* --- HERO SECTION --- */}
-      <section className="py-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative py-20 px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-teal-50">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-20 -right-20 w-[450px] h-[450px] bg-blue-200/60 rounded-full blur-[110px]" />
+          <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-teal-200/60 rounded-full blur-[110px]" />
+        </div>
+        <div className="relative max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 backdrop-blur-xl rounded-full border border-teal-200 mb-6">
               <Handshake className="w-4 h-4 text-teal-600" />

@@ -48,16 +48,6 @@ export default function Header() {
               Live Demo
             </Link>
 
-            {/* ✅ FIXED: Settings is now its own link, next to Demo */}
-            <Link
-              to="/settings"
-              className={`text-sm font-medium transition-colors ${
-                isActive('/settings') ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
-              }`}
-            >
-              Settings
-            </Link>
-
             <Link
               to="/partners"
               className={`text-sm font-medium transition-colors ${

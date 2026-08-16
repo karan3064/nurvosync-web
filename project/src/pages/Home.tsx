@@ -25,11 +25,12 @@ export default function Home() {
     <div className="min-h-screen bg-white selection:bg-cyan-200">
 
       {/* --- HERO SECTION --- */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12 bg-gradient-to-br from-teal-50 via-white to-blue-50">
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-100 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-teal-100 rounded-full blur-[120px]" />
+          <div className="absolute top-0 left-1/4 w-[550px] h-[550px] bg-blue-200/70 rounded-full blur-[110px] animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-[650px] h-[650px] bg-teal-200/70 rounded-full blur-[110px]" />
+          <div className="absolute top-1/3 right-1/3 w-[300px] h-[300px] bg-cyan-200/50 rounded-full blur-[100px]" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
