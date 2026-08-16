@@ -90,19 +90,19 @@ export default function AIAnalysis({
   // Dynamic UI Styles
   const isEmergency = liveSignal.severity === "danger";
   const containerBorder = isEmergency
-    ? "border-red-500 shadow-[0_0_25px_rgba(239,68,68,0.4)] bg-red-950/10"
-    : "border-white/10";
+    ? "border-red-500 shadow-[0_0_25px_rgba(239,68,68,0.15)] bg-red-50"
+    : "border-gray-200";
 
   return (
-    <div className={`space-y-6 font-sans text-white transition-all duration-300 ${isActive ? "" : "opacity-60 grayscale"}`}>
+    <div className={`space-y-6 font-sans text-gray-900 transition-all duration-300 ${isActive ? "" : "opacity-60 grayscale"}`}>
 
       {/* HEADER */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-3">
+      <div className="flex items-center justify-between border-b border-gray-200 pb-3">
         <div className="flex items-center gap-2">
-          <BrainCircuit className={`w-5 h-5 ${isEmergency ? "text-red-500 animate-bounce" : "text-purple-400 animate-pulse"}`} />
+          <BrainCircuit className={`w-5 h-5 ${isEmergency ? "text-red-500 animate-bounce" : "text-purple-600 animate-pulse"}`} />
           <div>
-            <h3 className="text-white font-bold tracking-widest text-xs uppercase">
-                NURVOSYNC <span className="text-purple-400">RULE ENGINE</span>
+            <h3 className="text-gray-900 font-bold tracking-widest text-xs uppercase">
+                NURVOSYNC <span className="text-purple-600">RULE ENGINE</span>
                 {isActive && <span className="ml-2 text-gray-500 font-normal">[{liveSignal.label}]</span>}
             </h3>
             <div className="text-[9px] text-gray-500 font-mono tracking-tighter">
@@ -110,9 +110,9 @@ export default function AIAnalysis({
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2 bg-white/5 px-2 py-1 rounded border border-white/5">
-            <div className={`w-1.5 h-1.5 rounded-full ${isActive ? "bg-green-500 animate-ping" : "bg-gray-600"}`} />
-            <span className="text-[10px] text-gray-400 font-bold uppercase">{isActive ? "MONITORING" : "IDLE"}</span>
+        <div className="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded border border-gray-200">
+            <div className={`w-1.5 h-1.5 rounded-full ${isActive ? "bg-green-500 animate-ping" : "bg-gray-400"}`} />
+            <span className="text-[10px] text-gray-600 font-bold uppercase">{isActive ? "MONITORING" : "IDLE"}</span>
         </div>
       </div>
 
@@ -120,26 +120,25 @@ export default function AIAnalysis({
           trained (npm run train-model) and loaded. Distinct from the
           rule engine above: this is an actual learned classifier. */}
       {trainedPrediction && (
-        <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-3 py-2">
-          <Cpu size={14} className="text-emerald-400" />
-          <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-wide">Trained Model</span>
-          <span className="text-xs text-white font-medium ml-auto">{trainedPrediction.label}</span>
-          <span className="text-[10px] text-gray-400 font-mono">{trainedPrediction.confidence}%</span>
+        <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2">
+          <Cpu size={14} className="text-emerald-600" />
+          <span className="text-[10px] text-emerald-600 font-bold uppercase tracking-wide">Trained Model</span>
+          <span className="text-xs text-gray-900 font-medium ml-auto">{trainedPrediction.label}</span>
+          <span className="text-[10px] text-gray-500 font-mono">{trainedPrediction.confidence}%</span>
         </div>
       )}
 
       {/* 1. THE BRAIN (LOGS) */}
-      <div className={`bg-black/40 rounded-lg border ${containerBorder} p-3 h-32 overflow-hidden flex flex-col relative backdrop-blur-md transition-all duration-500`}>
-         <div className="absolute inset-0 bg-scanline pointer-events-none opacity-20"></div>
+      <div className={`bg-gray-50 rounded-lg border ${containerBorder} p-3 h-32 overflow-hidden flex flex-col relative transition-all duration-500`}>
          <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-1 custom-scrollbar z-0 py-2">
-            {logs.length === 0 && <div className="text-gray-700 font-mono text-[10px] text-center mt-10">Waiting for sensor stream...</div>}
+            {logs.length === 0 && <div className="text-gray-400 font-mono text-[10px] text-center mt-10">Waiting for sensor stream...</div>}
             {logs.map(log => (
                 <div key={log.id} className="text-[10px] font-mono flex gap-2 items-center animate-in slide-in-from-left-2 fade-in duration-300">
-                    <span className="text-gray-600 opacity-50">[{log.time}]</span>
+                    <span className="text-gray-500 opacity-70">[{log.time}]</span>
                     <span className={`${
-                        log.type === 'danger' ? 'text-red-400 font-bold drop-shadow-[0_0_5px_rgba(248,113,113,0.5)]' :
-                        log.type === 'warning' ? 'text-yellow-400' :
-                        log.type === 'success' ? 'text-emerald-400' : 'text-blue-400'
+                        log.type === 'danger' ? 'text-red-600 font-bold' :
+                        log.type === 'warning' ? 'text-yellow-600' :
+                        log.type === 'success' ? 'text-emerald-600' : 'text-blue-600'
                     }`}>
                         {log.type === 'danger' && '⚠️ '}
                         {log.message}
@@ -150,21 +149,21 @@ export default function AIAnalysis({
       </div>
 
       {/* 2. LIVE IMPACT GRAPH */}
-      <div className="bg-white/5 p-4 rounded-xl border border-white/10 relative overflow-hidden group">
+      <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 relative overflow-hidden group">
           <div className="flex justify-between items-end mb-2 relative z-10">
               <div className="flex items-center gap-2">
-                <Activity size={14} className="text-cyan-400" />
-                <span className="text-xs text-gray-300 font-bold uppercase tracking-wider">Shock Absorption</span>
+                <Activity size={14} className="text-cyan-600" />
+                <span className="text-xs text-gray-700 font-bold uppercase tracking-wider">Shock Absorption</span>
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-white leading-none">{currentMaxImpact.toFixed(1)}<span className="text-xs text-gray-500 font-normal ml-1">g</span></div>
+                <div className="text-2xl font-bold text-gray-900 leading-none">{currentMaxImpact.toFixed(1)}<span className="text-xs text-gray-500 font-normal ml-1">g</span></div>
               </div>
           </div>
 
-          <div className="h-12 flex items-end gap-0.5 border-b border-white/10 relative z-10">
+          <div className="h-12 flex items-end gap-0.5 border-b border-gray-200 relative z-10">
               {impactHistory.map((val, i) => {
                   const heightPct = Math.min(val * 50, 100);
-                  const barColor = val > 1.3 ? "bg-red-500" : val > 0.7 ? "bg-yellow-400" : "bg-cyan-500/50";
+                  const barColor = val > 1.3 ? "bg-red-500" : val > 0.7 ? "bg-yellow-500" : "bg-cyan-600/60";
                   return (
                     <div
                         key={i}
@@ -179,38 +178,38 @@ export default function AIAnalysis({
 
       {/* 3. SYMMETRY & KINEMATICS GRID */}
       <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white/5 p-4 rounded-xl border border-white/10 flex flex-col justify-center relative overflow-hidden">
-              <div className="text-xs text-gray-400 mb-3 font-bold uppercase tracking-wider flex items-center gap-1 z-10">
+          <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col justify-center relative overflow-hidden">
+              <div className="text-xs text-gray-600 mb-3 font-bold uppercase tracking-wider flex items-center gap-1 z-10">
                 <Scale size={12} /> Load Dist
               </div>
               <div className="flex justify-center mb-2 z-10">
-                <div className="w-16 h-1 bg-gray-800 rounded-full overflow-hidden relative">
+                <div className="w-16 h-1 bg-gray-200 rounded-full overflow-hidden relative">
                      <div
                         className="absolute h-full w-1/2 bg-indigo-500 transition-all duration-300 ease-out"
                         style={{ left: `${leftPercent}%`, transform: 'translateX(-50%)' }}
                      />
                 </div>
               </div>
-              <div className="flex justify-between text-[10px] font-mono text-gray-400 z-10">
-                  <span className={leftPercent > 55 ? "text-white font-bold" : ""}>{leftPercent.toFixed(0)}% L</span>
-                  <span className={leftPercent < 45 ? "text-white font-bold" : ""}>{(100 - leftPercent).toFixed(0)}% R</span>
+              <div className="flex justify-between text-[10px] font-mono text-gray-600 z-10">
+                  <span className={leftPercent > 55 ? "text-gray-900 font-bold" : ""}>{leftPercent.toFixed(0)}% L</span>
+                  <span className={leftPercent < 45 ? "text-gray-900 font-bold" : ""}>{(100 - leftPercent).toFixed(0)}% R</span>
               </div>
           </div>
 
-          <div className="bg-white/5 p-4 rounded-xl border border-white/10 flex flex-col justify-center">
-              <div className="text-xs text-gray-400 mb-3 font-bold uppercase tracking-wider flex items-center gap-1">
+          <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col justify-center">
+              <div className="text-xs text-gray-600 mb-3 font-bold uppercase tracking-wider flex items-center gap-1">
                 <Zap size={12} /> Stability
               </div>
               <div className="space-y-2">
                   <div className="flex items-center gap-2">
                       <span className="text-[9px] text-gray-500">L</span>
-                      <div className="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                      <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                           <div className={`h-full rounded-full transition-all duration-300 ${Math.abs(leftRoll) > 0.3 ? "bg-red-500 w-full" : "bg-green-500 w-1/3"}`} />
                       </div>
                   </div>
                   <div className="flex items-center gap-2">
                       <span className="text-[9px] text-gray-500">R</span>
-                      <div className="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                      <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                           <div className={`h-full rounded-full transition-all duration-300 ${Math.abs(rightRoll) > 0.3 ? "bg-red-500 w-full" : "bg-green-500 w-1/3"}`} />
                       </div>
                   </div>

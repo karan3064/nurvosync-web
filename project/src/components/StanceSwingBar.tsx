@@ -22,9 +22,9 @@ export default function StanceSwingBar({ isStance, side }: { isStance: boolean, 
                     <div 
                         key={i}
                         className={`flex-1 rounded-sm transition-colors duration-75 ${
-                            active 
-                            ? (side === "left" ? "bg-blue-500" : "bg-indigo-500") 
-                            : "bg-gray-800"
+                            active
+                            ? (side === "left" ? "bg-blue-500" : "bg-indigo-500")
+                            : "bg-gray-200"
                         }`}
                     />
                 ))}

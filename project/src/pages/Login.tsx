@@ -34,16 +34,16 @@ export default function Login() {
           <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4">
             <Zap className="w-7 h-7 text-white" strokeWidth={2.5} />
           </div>
-          <h1 className="text-2xl font-bold text-white">Doctor Login</h1>
-          <p className="text-gray-400 text-sm mt-2 text-center">
+          <h1 className="text-2xl font-bold text-gray-900">Doctor Login</h1>
+          <p className="text-gray-600 text-sm mt-2 text-center">
             Sign in to access live gait analysis and patient reports.
           </p>
         </div>
 
-        <div className="bg-[#111827]/90 backdrop-blur-md border border-white/10 rounded-3xl shadow-2xl p-8">
+        <div className="bg-white border border-gray-200 rounded-3xl shadow-lg p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email
               </label>
               <input
@@ -53,13 +53,13 @@ export default function Login() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+                className="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500"
                 placeholder="doctor@hospital.com"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
               <input
@@ -69,13 +69,13 @@ export default function Login() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50"
+                className="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500"
                 placeholder="••••••••"
               />
             </div>
 
             {error && (
-              <div className="flex items-start gap-2 text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2.5">
+              <div className="flex items-start gap-2 text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2.5">
                 <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <span>{error}</span>
               </div>
@@ -94,7 +94,7 @@ export default function Login() {
 
         <p className="text-center text-gray-500 text-sm mt-6">
           Not a registered doctor?{' '}
-          <Link to="/partners" className="text-cyan-400 hover:text-cyan-300">
+          <Link to="/partners" className="text-cyan-600 hover:text-cyan-700">
             Contact us to get access
           </Link>
         </p>

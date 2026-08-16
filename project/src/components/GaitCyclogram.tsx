@@ -18,7 +18,7 @@ export default function GaitCyclogram({ leftForce, rightForce }: { leftForce: nu
     ctx.clearRect(0, 0, 200, 200);
 
     // Draw Grid (The "Ideal" 45-degree symmetry line)
-    ctx.strokeStyle = "#334155";
+    ctx.strokeStyle = "#cbd5e1";
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(0, 200); ctx.lineTo(200, 0); // Diagonal
@@ -26,7 +26,7 @@ export default function GaitCyclogram({ leftForce, rightForce }: { leftForce: nu
 
     // Draw The Loop
     ctx.beginPath();
-    ctx.strokeStyle = "#22d3ee"; // Cyan
+    ctx.strokeStyle = "#0891b2"; // Cyan (darker for contrast on light bg)
     ctx.lineWidth = 3;
     
     // Scale: Assuming max force ~1000 arbitrary units, map to 0-200px
@@ -45,7 +45,7 @@ export default function GaitCyclogram({ leftForce, rightForce }: { leftForce: nu
     const last = history.current[history.current.length - 1];
     if (last) {
         ctx.beginPath();
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "#0f172a";
         ctx.arc(last.l * 100, 200 - (last.r * 100), 4, 0, Math.PI * 2);
         ctx.fill();
     }
@@ -54,8 +54,8 @@ export default function GaitCyclogram({ leftForce, rightForce }: { leftForce: nu
 
   return (
     <div className="flex flex-col items-center">
-      <h4 className="text-gray-400 text-xs uppercase tracking-wider mb-2">Gait Symmetry Loop</h4>
-      <div className="border border-gray-700 bg-gray-900/50 rounded-lg p-2">
+      <h4 className="text-gray-500 text-xs uppercase tracking-wider mb-2">Gait Symmetry Loop</h4>
+      <div className="border border-gray-200 bg-gray-50 rounded-lg p-2">
         <canvas ref={canvasRef} width={200} height={200} />
       </div>
     </div>

@@ -203,26 +203,26 @@ export default function HeatmapCanvas({ pressure, onLayoutChange, side = "left" 
         
         {/* --- TOOLBAR --- */}
         <div className={`absolute top-2 left-2 right-2 z-50 flex gap-2 transition-all ${isEditing ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
-            <div className="bg-gray-800/90 backdrop-blur border border-white/10 rounded-lg p-1 flex gap-1 shadow-xl">
-                <button onClick={addSensor} className="p-2 hover:bg-white/10 rounded-md text-green-400"><Plus size={16}/></button>
-                <button onClick={removeSensor} className="p-2 hover:bg-white/10 rounded-md text-red-400"><Minus size={16}/></button>
-                <div className="w-px bg-white/10 mx-1"></div>
-                <button onClick={resetLayout} className="p-2 hover:bg-white/10 rounded-md text-gray-400"><RotateCcw size={16}/></button>
+            <div className="bg-white/95 backdrop-blur border border-gray-200 rounded-lg p-1 flex gap-1 shadow-xl">
+                <button onClick={addSensor} className="p-2 hover:bg-gray-100 rounded-md text-green-600"><Plus size={16}/></button>
+                <button onClick={removeSensor} className="p-2 hover:bg-gray-100 rounded-md text-red-600"><Minus size={16}/></button>
+                <div className="w-px bg-gray-200 mx-1"></div>
+                <button onClick={resetLayout} className="p-2 hover:bg-gray-100 rounded-md text-gray-600"><RotateCcw size={16}/></button>
             </div>
         </div>
 
         {/* --- EDIT BUTTON --- */}
-        <button 
+        <button
             onClick={() => setIsEditing(!isEditing)}
-            className={`absolute bottom-4 right-4 z-50 p-3 rounded-full shadow-lg border transition-all ${isEditing ? 'bg-blue-600 border-blue-400 text-white' : 'bg-gray-800/50 border-white/10 text-gray-400 hover:bg-gray-700'}`}
+            className={`absolute bottom-4 right-4 z-50 p-3 rounded-full shadow-lg border transition-all ${isEditing ? 'bg-blue-600 border-blue-400 text-white' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
         >
             {isEditing ? <Check size={20} /> : <Settings2 size={20} />}
         </button>
 
         {/* --- CANVAS --- */}
-        <div 
+        <div
             ref={containerRef}
-            className={`relative flex-1 rounded-xl overflow-hidden transition-all duration-300 ${isEditing ? 'bg-gray-900 ring-2 ring-blue-500/50 scale-[0.98]' : 'bg-transparent'}`}
+            className={`relative flex-1 rounded-xl overflow-hidden transition-all duration-300 ${isEditing ? 'bg-gray-100 ring-2 ring-blue-400 scale-[0.98]' : 'bg-transparent'}`}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
         >
@@ -242,12 +242,12 @@ export default function HeatmapCanvas({ pressure, onLayoutChange, side = "left" 
                 {/* 🛠️ SVG MIRROR GROUP: Flips the vector overlays */}
                 <g transform={side === "right" ? `scale(-1, 1) translate(-${WIDTH}, 0)` : ""}>
 
-                    <path d={FOOT_PATH} fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeDasharray="4 4" />
+                    <path d={FOOT_PATH} fill="none" stroke="rgba(15,23,42,0.2)" strokeWidth="2" strokeDasharray="4 4" />
 
                     {/* --- SENSOR HANDLES --- */}
                     {points.map((pt, i) => (
-                        <g 
-                            key={i} 
+                        <g
+                            key={i}
                             transform={`translate(${pt.x}, ${pt.y})`}
                             className={`${isEditing ? 'pointer-events-auto cursor-grab active:cursor-grabbing' : 'pointer-events-none'}`}
                             onPointerDown={(e) => handlePointerDown(i, e)}
@@ -255,19 +255,19 @@ export default function HeatmapCanvas({ pressure, onLayoutChange, side = "left" 
                             {isEditing ? (
                                 <>
                                     <circle r="15" fill="rgba(59, 130, 246, 0.2)" stroke="rgba(59, 130, 246, 0.5)" strokeWidth="1" className="animate-pulse" />
-                                    <circle r="4" fill="white" />
+                                    <circle r="4" fill="#1d4ed8" />
                                     {/* 🛠️ Un-flip text so it is readable on Right foot */}
-                                    <text 
-                                      y="-20" 
-                                      textAnchor="middle" 
-                                      fill="white" 
-                                      fontSize="10" 
+                                    <text
+                                      y="-20"
+                                      textAnchor="middle"
+                                      fill="#1e293b"
+                                      fontSize="10"
                                       fontWeight="bold"
                                       transform={side === "right" ? "scale(-1, 1)" : ""}
                                     >S{i}</text>
                                 </>
                             ) : (
-                                 <circle r="3" fill="rgba(255,255,255,0.2)" />
+                                 <circle r="3" fill="rgba(15,23,42,0.25)" />
                             )}
                         </g>
                     ))}
@@ -276,7 +276,7 @@ export default function HeatmapCanvas({ pressure, onLayoutChange, side = "left" 
                     <polyline
                         points={copHistory.map(p => `${p.x},${p.y}`).join(" ")}
                         fill="none"
-                        stroke="white"
+                        stroke="#334155"
                         strokeWidth="3"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -286,8 +286,8 @@ export default function HeatmapCanvas({ pressure, onLayoutChange, side = "left" 
                     {/* --- COP DOT --- */}
                     {cop.active && (
                         <g className="transition-all duration-75 ease-linear" style={{ transform: `translate(${cop.x}px, ${cop.y}px)` }}>
-                            <circle r="12" fill="none" stroke="#22d3ee" strokeWidth="2" className="animate-ping opacity-75" />
-                            <circle r="5" fill="#22d3ee" stroke="white" strokeWidth="2" />
+                            <circle r="12" fill="none" stroke="#0891b2" strokeWidth="2" className="animate-ping opacity-75" />
+                            <circle r="5" fill="#0891b2" stroke="#ffffff" strokeWidth="2" />
                         </g>
                     )}
                 </g>

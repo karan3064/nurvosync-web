@@ -34,12 +34,12 @@ export default function Settings() {
   };
 
   return (
-    <div className="p-10 text-white">
+    <div className="p-10 pt-28 text-gray-900">
       <h1 className="text-2xl mb-4">FSR Calibration</h1>
 
       <div className="flex gap-10">
         {["left", "right"].map(foot => (
-          <div key={foot} className="relative w-[200px] h-[400px] bg-gray-800 rounded-xl">
+          <div key={foot} className="relative w-[200px] h-[400px] bg-gray-100 border border-gray-300 rounded-xl">
             {layout[foot].map(fsr => (
               <div
                 key={fsr.id}
@@ -50,7 +50,7 @@ export default function Settings() {
                   const y = ((e.clientY - rect.top) / rect.height) * 100;
                   moveFSR(foot, fsr.id, x, y);
                 }}
-                className="absolute w-6 h-6 bg-cyan-400 rounded-full cursor-move"
+                className="absolute w-6 h-6 bg-cyan-500 rounded-full cursor-move shadow"
                 style={{
                   left: `${fsr.x}%`,
                   top: `${fsr.y}%`,
@@ -64,7 +64,7 @@ export default function Settings() {
 
       <button
         onClick={saveLayout}
-        className="mt-6 px-4 py-2 bg-cyan-600 rounded"
+        className="mt-6 px-4 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-700 transition-colors"
       >
         Save Calibration
       </button>

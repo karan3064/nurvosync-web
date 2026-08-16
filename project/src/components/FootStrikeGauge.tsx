@@ -7,30 +7,30 @@ export default function FootStrikeGauge({ roll, side }: { roll: number, side: "l
     
     // Determine status
     let status = "Neutral";
-    let color = "text-green-400";
-    if (angle > 10) { status = "Over-Pronation"; color = "text-red-400"; }
-    if (angle < -10) { status = "Supination"; color = "text-orange-400"; }
+    let color = "text-green-600";
+    if (angle > 10) { status = "Over-Pronation"; color = "text-red-600"; }
+    if (angle < -10) { status = "Supination"; color = "text-orange-600"; }
 
     return (
-        <div className="bg-gray-900/50 rounded-xl p-4 border border-white/5 flex flex-col items-center">
+        <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 flex flex-col items-center">
             <span className="text-xs text-gray-500 uppercase mb-2">Strike Angle ({side})</span>
-            
+
             <div className="relative w-32 h-16 overflow-hidden mb-2">
                  {/* Gauge Background */}
-                 <div className="absolute bottom-0 w-32 h-32 rounded-full border-[12px] border-gray-700 border-b-0 border-l-0 border-r-0"></div>
-                 
+                 <div className="absolute bottom-0 w-32 h-32 rounded-full border-[12px] border-gray-300 border-b-0 border-l-0 border-r-0"></div>
+
                  {/* Needle */}
-                 <div 
-                    className="absolute bottom-0 left-1/2 w-1 h-14 bg-white origin-bottom rounded-full transition-transform duration-300"
+                 <div
+                    className="absolute bottom-0 left-1/2 w-1 h-14 bg-gray-900 origin-bottom rounded-full transition-transform duration-300"
                     style={{ transform: `translateX(-50%) rotate(${angle}deg)` }}
                  ></div>
-                 
+
                  {/* Center Dot */}
-                 <div className="absolute bottom-0 left-1/2 w-4 h-4 bg-gray-200 rounded-full -translate-x-1/2 translate-y-1/2"></div>
+                 <div className="absolute bottom-0 left-1/2 w-4 h-4 bg-gray-700 rounded-full -translate-x-1/2 translate-y-1/2"></div>
             </div>
 
             <div className={`text-sm font-bold ${color}`}>{status}</div>
-            <div className="text-xs text-gray-400">{angle.toFixed(1)}°</div>
+            <div className="text-xs text-gray-600">{angle.toFixed(1)}°</div>
         </div>
     );
 }

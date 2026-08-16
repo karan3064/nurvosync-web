@@ -61,7 +61,7 @@ export default function FSRConfigurator({ foot }: { foot: "left" | "right" }) {
   };
 
   return (
-    <div className="relative w-[280px] h-[520px] border border-dashed border-white/20 rounded-xl overflow-hidden bg-black/30">
+    <div className="relative w-[280px] h-[520px] border border-dashed border-gray-300 rounded-xl overflow-hidden bg-gray-50">
       {image && (
         <img
           src={image}
@@ -80,7 +80,7 @@ export default function FSRConfigurator({ foot }: { foot: "left" | "right" }) {
         </div>
       ))}
 
-      <label className="absolute bottom-2 left-2 right-2 bg-blue-600 text-xs text-center py-1 rounded cursor-pointer">
+      <label className="absolute bottom-2 left-2 right-2 bg-blue-600 text-white text-xs text-center py-1 rounded cursor-pointer">
         Upload Foot Image
         <input hidden type="file" onChange={onImageUpload} />
       </label>

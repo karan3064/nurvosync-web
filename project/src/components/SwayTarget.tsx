@@ -26,7 +26,7 @@ export default function SwayTarget({ x, y }: { x: number, y: number }) {
     ctx.clearRect(0, 0, w, h);
 
     // Draw Target Rings
-    ctx.strokeStyle = "#334155";
+    ctx.strokeStyle = "#94a3b8";
     ctx.lineWidth = 1;
     [20, 40, 60, 80].forEach(r => {
         ctx.beginPath();
@@ -41,7 +41,7 @@ export default function SwayTarget({ x, y }: { x: number, y: number }) {
     ctx.stroke();
 
     // Draw Sway Path
-    ctx.strokeStyle = "#facc15"; // Yellow
+    ctx.strokeStyle = "#ca8a04"; // Yellow (darkened for contrast on light bg)
     ctx.lineWidth = 2;
     ctx.beginPath();
     trace.current.forEach((pt, i) => {
@@ -54,8 +54,8 @@ export default function SwayTarget({ x, y }: { x: number, y: number }) {
 
   return (
     <div className="relative flex flex-col items-center">
-       <h4 className="text-gray-400 text-xs uppercase tracking-wider mb-2">Postural Sway (CoP)</h4>
-       <canvas ref={canvasRef} width={200} height={200} className="bg-gray-900 rounded-full border border-gray-700 shadow-inner" />
+       <h4 className="text-gray-500 text-xs uppercase tracking-wider mb-2">Postural Sway (CoP)</h4>
+       <canvas ref={canvasRef} width={200} height={200} className="bg-gray-50 rounded-full border border-gray-200 shadow-inner" />
     </div>
   );
 }

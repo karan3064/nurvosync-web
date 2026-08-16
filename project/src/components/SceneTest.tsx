@@ -122,13 +122,13 @@ export default function SceneTest({ pitch, roll }: Props) {
   const cleanRoll  = roll - offsets.roll;
 
   return (
-    <div className="w-full h-full min-h-[300px] cursor-grab active:cursor-grabbing bg-gray-900 rounded-xl overflow-hidden relative group">
-      
-      <button 
+    <div className="w-full h-full min-h-[300px] cursor-grab active:cursor-grabbing bg-gray-100 rounded-xl overflow-hidden relative group">
+
+      <button
         onClick={handleCalibrate}
-        className="absolute top-3 right-3 z-50 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 px-3 py-2 rounded-lg flex items-center gap-2 text-sm transition-all shadow-lg"
+        className="absolute top-3 right-3 z-50 bg-white/90 hover:bg-white text-gray-900 backdrop-blur-md border border-gray-300 px-3 py-2 rounded-lg flex items-center gap-2 text-sm transition-all shadow-lg"
       >
-        <Crosshair size={16} className="text-cyan-400" />
+        <Crosshair size={16} className="text-cyan-600" />
         <span>Tare</span>
       </button>
 
