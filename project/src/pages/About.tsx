@@ -77,7 +77,7 @@ export default function About() {
                   {
                     icon: Database,
                     title: 'Evidence-Based',
-                    description: 'Data validated against force plates and gold-standard motion capture.',
+                    description: 'Engineered to match the fidelity of traditional force-plate and motion-capture systems.',
                   },
                   {
                     icon: HeartPulse,
@@ -87,7 +87,7 @@ export default function About() {
                   {
                     icon: TrendingUp,
                     title: 'Outcome-Driven',
-                    description: 'Reducing recovery times and preventing re-injury through early detection.',
+                    description: 'Built to help clinicians catch gait deterioration early, before it becomes a bigger problem.',
                   },
                 ].map((value, idx) => (
                   <div key={idx} className="text-center group">

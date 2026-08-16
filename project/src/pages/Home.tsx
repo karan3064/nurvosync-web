@@ -178,7 +178,7 @@ export default function Home() {
               </h2>
               <p className="text-lg text-gray-400 mb-8">
                 Our ultra-thin sensor array fits into any orthopedic footwear. 
-                Engineered for continuous remote patient monitoring (RPM) with validated accuracy against force-plate standards.
+                Engineered for continuous remote patient monitoring (RPM), built to the same precision standards as force-plate lab equipment.
               </p>
               <ul className="space-y-4">
                 {['128-Point Capacitive Pressure Sensors', '6-Axis IMU for Gait Kinematics', 'Antimicrobial & Hypoallergenic Surface'].map((feat, i) => (

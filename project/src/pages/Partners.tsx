@@ -1,8 +1,6 @@
 import {
   Handshake,
   Building2,
-  LineChart,
-  ShieldCheck,
   Zap,
   Check,
   ArrowRight,
@@ -55,10 +53,10 @@ export default function Partners() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Providers & Clinics</h3>
               <p className="text-gray-400 mb-4 text-sm">
-                Generate new revenue streams via RPM CPT codes while improving patient outcomes.
+                Support remote patient monitoring workflows while improving patient outcomes.
               </p>
               <ul className="space-y-2">
-                {['Remote Patient Monitoring (RPM)', 'Post-Op Rehab Tracking', 'Diabetic Foot Ulcer Prevention'].map((item, idx) => (
+                {['Remote Patient Monitoring (RPM)', 'Post-Op Rehab Tracking', 'Diabetic Foot Risk Monitoring'].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-2 text-gray-300 text-xs">
                     <Check className="w-3 h-3 text-teal-400" /> {item}
                   </li>
@@ -91,10 +89,10 @@ export default function Partners() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">Research & Trials</h3>
               <p className="text-gray-400 mb-4 text-sm">
-                Gather validated gait data from participants in the real world, not just the lab.
+                Gather gait data from participants in the real world, not just the lab.
               </p>
               <ul className="space-y-2">
-                {['Raw Sensor Data Access (CSV/API)', 'Longitudinal Studies', 'Validated Against Force Plates'].map((item, idx) => (
+                {['Raw Sensor Data Access (CSV/API)', 'Longitudinal Studies', 'Configurable Sampling Rates'].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-2 text-gray-300 text-xs">
                     <Check className="w-3 h-3 text-purple-400" /> {item}
                   </li>
@@ -170,89 +168,6 @@ export default function Partners() {
             ))}
           </div>
 
-          {/* --- DATA VISUALIZATION SECTION --- */}
-          <div className="grid lg:grid-cols-2 gap-6 mb-8">
-            
-            {/* Visual 1: Recovery Trajectory */}
-            <GlassCard className="p-8 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-transparent opacity-50" />
-              <div className="flex justify-between items-end mb-6 relative z-10">
-                 <div>
-                    <h3 className="text-xl font-bold text-white">Patient Recovery Trajectory</h3>
-                    <p className="text-sm text-gray-400">Post-Op Weeks 1-8 • Symmetry Index</p>
-                 </div>
-                 <div className="text-right">
-                    <div className="text-3xl font-mono font-bold text-teal-400">94%</div>
-                    <div className="text-xs text-teal-200">Current Symmetry</div>
-                 </div>
-              </div>
-              
-              <div className="relative z-10 h-64 bg-gradient-to-b from-gray-900/60 to-black/60 rounded-2xl p-6 overflow-hidden border border-white/5">
-                <svg viewBox="0 0 300 150" className="w-full h-full">
-                  <defs>
-                    <linearGradient id="recoveryGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="rgb(20, 184, 166)" stopOpacity="0.5" />
-                      <stop offset="100%" stopColor="rgb(20, 184, 166)" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  
-                  {/* Grid Lines */}
-                  <line x1="0" y1="120" x2="300" y2="120" stroke="#333" strokeDasharray="4" />
-                  <line x1="0" y1="80" x2="300" y2="80" stroke="#333" strokeDasharray="4" />
-                  <line x1="0" y1="40" x2="300" y2="40" stroke="#333" strokeDasharray="4" />
-
-                  {/* The Graph Line */}
-                  <path d="M 0 130 C 50 120, 100 80, 150 70 S 250 40, 300 20" fill="url(#recoveryGrad)" stroke="none" />
-                  <path d="M 0 130 C 50 120, 100 80, 150 70 S 250 40, 300 20" fill="none" stroke="rgb(45, 212, 191)" strokeWidth="3" strokeLinecap="round" />
-                  
-                  {/* Data Points */}
-                  <circle cx="0" cy="130" r="4" fill="white" />
-                  <circle cx="150" cy="70" r="4" fill="white" />
-                  <circle cx="300" cy="20" r="4" fill="white" />
-                  
-                  {/* Goal Line */}
-                  <line x1="0" y1="20" x2="300" y2="20" stroke="rgb(59, 130, 246)" strokeDasharray="2" opacity="0.5" />
-                  <text x="250" y="15" fill="rgb(59, 130, 246)" fontSize="10">Clinical Goal</text>
-                </svg>
-              </div>
-            </GlassCard>
-
-            {/* Visual 2: Compliance Stats */}
-            <GlassCard className="p-8 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-50" />
-              <h3 className="text-xl font-bold text-white mb-6 relative z-10">Adherence & Compliance</h3>
-              <div className="relative z-10 space-y-6">
-                {[
-                  { label: 'Device Wear Time (>8hrs/day)', value: 88, color: 'from-teal-500 to-emerald-500' },
-                  { label: 'Exercise Protocol Completion', value: 72, color: 'from-blue-500 to-indigo-500' },
-                  { label: 'Data Sync Success Rate', value: 99.9, color: 'from-purple-500 to-pink-500' },
-                ].map((item, idx) => (
-                  <div key={idx}>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-300">{item.label}</span>
-                      <span className={`text-sm font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
-                        {item.value}%
-                      </span>
-                    </div>
-                    <div className="h-3 bg-gray-800 rounded-full overflow-hidden border border-white/5">
-                      <div
-                        className={`h-full bg-gradient-to-r ${item.color} rounded-full transition-all duration-1000 ease-out`}
-                        style={{ width: `${item.value}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 p-4 bg-blue-900/20 border border-blue-500/30 rounded-xl">
-                 <div className="flex gap-3">
-                    <ShieldCheck className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                    <p className="text-xs text-blue-200">
-                       <strong>RPM Reimbursement Ready:</strong> Our system automatically tracks billable hours (CPT 99454) and generates audit-ready monthly reports.
-                    </p>
-                 </div>
-              </div>
-            </GlassCard>
-          </div>
         </div>
       </section>
 
