@@ -6,7 +6,6 @@ import {
   Activity,
   HeartPulse,
   TrendingUp,
-  ShieldCheck,
   Sparkles,
   Award,
   Database,
@@ -176,13 +175,13 @@ export default function About() {
               {
                 icon: Lock,
                 title: 'Privacy by Design',
-                description: 'We are HIPAA compliant. Patient data is encrypted at rest and in transit. We operate under strict BAA (Business Associate Agreements).',
+                description: 'Patient data is encrypted at rest and in transit, with access controls built around clinical data best practices.',
                 color: 'text-green-400'
               },
               {
                 icon: Award,
-                title: 'Regulatory First',
-                description: 'Developed in accordance with ISO 13485 quality management standards. FDA Class II registered device pathway.',
+                title: 'Built for Rigor',
+                description: 'We hold our engineering and clinical validation processes to the same standard we\'d expect from a device in our own family\'s care.',
                 color: 'text-yellow-400'
               },
             ].map((approach, idx) => (
@@ -195,39 +194,6 @@ export default function About() {
               </GlassCard>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* --- COMPLIANCE SECTION --- */}
-      <section className="py-20 px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <GlassCard className="p-10 md:p-12 border-green-500/30 bg-gradient-to-br from-green-950/30 to-teal-950/30 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/10 blur-[80px] rounded-full" />
-            
-            <div className="flex flex-col md:flex-row items-center gap-8 relative z-10">
-              <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0 border border-green-500/30">
-                <ShieldCheck className="w-8 h-8 text-green-400" />
-              </div>
-              
-              <div className="text-center md:text-left">
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  Commitment to Quality & Safety
-                </h3>
-                <p className="text-gray-300 mb-6">
-                  NurvoSync is committed to the highest standards of medical device manufacturing. 
-                  Our data pipeline adheres to HL7 FHIR standards for interoperability, and our 
-                  infrastructure is SOC2 Type II certified.
-                </p>
-                <div className="flex flex-wrap justify-center md:justify-start gap-3">
-                  {['FDA Registered', 'HIPAA Compliant', 'ISO 13485', 'SOC2 Type II'].map((tag, i) => (
-                    <span key={i} className="px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-md text-green-300 text-xs font-semibold">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </GlassCard>
         </div>
       </section>
 

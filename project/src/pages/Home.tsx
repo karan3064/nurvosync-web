@@ -4,7 +4,6 @@ import {
   Activity,
   BarChart3,
   Zap,
-  Shield,
   Gauge,
   TrendingUp,
   Users,
@@ -43,7 +42,7 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
               </span>
-              <span className="text-sm font-medium text-teal-200 tracking-wide">FDA-Registered Class II Medical Device</span>
+              <span className="text-sm font-medium text-teal-200 tracking-wide">Real-Time Remote Gait Monitoring</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight text-white">
@@ -263,30 +262,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* --- MEDICAL COMPLIANCE SECTION --- */}
-      <section className="py-16 px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <GlassCard className="relative overflow-hidden border-teal-500/30 bg-teal-950/20">
-             <div className="absolute top-0 right-0 p-32 bg-teal-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-             <div className="relative p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
-                <div className="flex-shrink-0 w-20 h-20 bg-teal-500/10 rounded-full flex items-center justify-center border border-teal-500/20">
-                  <Shield className="w-10 h-10 text-teal-400" />
-                </div>
-                <div className="flex-grow text-center md:text-left">
-                  <h3 className="text-2xl font-bold text-white mb-2">Medical Grade & Compliant</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
-                    {['HIPAA Compliant', 'FDA Class II', 'ISO 13485', 'GDPR Secure'].map((cert, i) => (
-                        <div key={i} className="flex items-center gap-2 text-sm text-gray-300">
-                            <Check className="w-4 h-4 text-teal-400" /> {cert}
-                        </div>
-                    ))}
-                  </div>
-                </div>
-             </div>
-          </GlassCard>
         </div>
       </section>
 

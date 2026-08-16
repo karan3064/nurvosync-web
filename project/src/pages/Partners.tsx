@@ -41,8 +41,8 @@ export default function Partners() {
             </h1>
 
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Empower your practice, lab, or research facility with the world's most advanced 
-              remote gait monitoring stack. FDA-registered and HIPAA-compliant.
+              Empower your practice, lab, or research facility with the world's most advanced
+              remote gait monitoring stack.
             </p>
           </div>
 
@@ -123,16 +123,16 @@ export default function Partners() {
             {[
               {
                 icon: FileHeart,
-                title: 'EMR Compatible',
-                description: 'Direct integration with Epic, Cerner, and AthenaHealth via FHIR standards.',
+                title: 'EMR Ready',
+                description: 'Structured data export designed to flow into your EMR/EHR workflow.',
                 badge: 'Interoperable',
                 color: 'from-blue-500/20 to-cyan-500/20',
                 iconColor: 'text-blue-400',
               },
               {
                 icon: Lock,
-                title: 'HIPAA & GDPR',
-                description: 'End-to-end encryption with BAA (Business Associate Agreement) availability.',
+                title: 'Encrypted by Default',
+                description: 'End-to-end encryption for patient data, both at rest and in transit.',
                 badge: 'Secure',
                 color: 'from-green-500/20 to-emerald-500/20',
                 iconColor: 'text-green-400',
@@ -293,10 +293,6 @@ export default function Partners() {
                 </a>
               </div>
 
-              <p className="text-xs text-gray-500 mt-8">
-                NurvoSync is an FDA Class II Registered Medical Device. <br className="hidden sm:block"/>
-                For specific CPT reimbursement questions, please consult your billing specialist.
-              </p>
             </div>
           </GlassCard>
         </div>
