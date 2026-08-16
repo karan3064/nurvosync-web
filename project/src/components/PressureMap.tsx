@@ -1,38 +1,53 @@
-type PressureMapProps = {
-  title: string;
-  pressure: number[]; // 5 values (0 → 1)
+type Props = {
+  pressure: number[]; // 5 FSR values (0–1)
 };
 
-const FSR_POSITIONS = [
-  { x: 50, y: 15 }, // toe
-  { x: 35, y: 40 }, // left ball
-  { x: 65, y: 40 }, // right ball
-  { x: 50, y: 65 }, // mid foot
-  { x: 50, y: 85 }, // heel
+const fsrPositions = [
+  { x: 100, y: 60 },   // toe
+  { x: 70,  y: 120 },  // ball left
+  { x: 130, y: 120 },  // ball right
+  { x: 100, y: 200 },  // midfoot
+  { x: 100, y: 260 },  // heel
 ];
 
-export default function PressureMap({ title, pressure }: PressureMapProps) {
-  return (
-    <div className="p-4">
-      <h3 className="text-white font-semibold mb-3">{title}</h3>
+// Convert pressure → heatmap color
+function pressureToColor(p: number) {
+  if (p < 0.33) {
+    return `rgba(0,255,0,${p + 0.2})`;        // green
+  } else if (p < 0.66) {
+    return `rgba(255,255,0,${p + 0.2})`;      // yellow
+  } else {
+    return `rgba(255,0,0,${p + 0.2})`;        // red
+  }
+}
 
-      <div className="relative w-[180px] h-[360px] bg-gray-900 rounded-2xl mx-auto border border-white/10">
-        {FSR_POSITIONS.map((pos, i) => (
-          <div
+export default function PressureMap({ pressure }: Props) {
+  return (
+    <svg viewBox="0 0 200 300" className="w-full h-full">
+      <defs>
+        {pressure.map((p, i) => (
+          <radialGradient
             key={i}
-            className="absolute rounded-full transition-all duration-300"
-            style={{
-              left: `${pos.x}%`,
-              top: `${pos.y}%`,
-              width: `${40 + pressure[i] * 60}px`,
-              height: `${40 + pressure[i] * 60}px`,
-              background: `rgba(255, 80, 80, ${pressure[i]})`,
-              transform: "translate(-50%, -50%)",
-              filter: "blur(12px)",
-            }}
-          />
+            id={`heat-${i}`}
+            cx="50%"
+            cy="50%"
+            r="50%"
+          >
+            <stop offset="0%" stopColor={pressureToColor(p)} />
+            <stop offset="100%" stopColor="rgba(0,0,0,0)" />
+          </radialGradient>
         ))}
-      </div>
-    </div>
+      </defs>
+
+      {pressure.map((p, i) => (
+        <circle
+          key={i}
+          cx={fsrPositions[i].x}
+          cy={fsrPositions[i].y}
+          r={20 + p * 30}       // radius increases with pressure
+          fill={`url(#heat-${i})`}
+        />
+      ))}
+    </svg>
   );
 }

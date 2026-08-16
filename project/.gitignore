@@ -21,3 +21,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Raw sensor recordings for model training (not source code)
+training-data/*.csv

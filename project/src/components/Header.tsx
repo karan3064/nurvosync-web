@@ -1,16 +1,24 @@
-import { Link, useLocation } from 'react-router-dom';
-import { Zap } from 'lucide-react';
-
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Zap, LogOut } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Header() {
   const location = useLocation();
-
+  const navigate = useNavigate();
+  const { session, signOut } = useAuth();
   const isActive = (path: string) => location.pathname === path;
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-xl border-b border-white/10">
       <nav className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between">
+          
+          {/* LOGO */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center transform transition-transform group-hover:scale-105">
               <Zap className="w-6 h-6 text-white" strokeWidth={2.5} />
@@ -20,6 +28,7 @@ export default function Header() {
             </span>
           </Link>
 
+          {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-8">
             <Link
               to="/"
@@ -29,6 +38,7 @@ export default function Header() {
             >
               Home
             </Link>
+
             <Link
               to="/demo"
               className={`text-sm font-medium transition-colors ${
@@ -36,14 +46,18 @@ export default function Header() {
               }`}
             >
               Live Demo
-              <Link
-  to="/settings"
-  className="text-gray-300 hover:text-cyan-400"
->
-  Settings
-</Link>
-
             </Link>
+
+            {/* ✅ FIXED: Settings is now its own link, next to Demo */}
+            <Link
+              to="/settings"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/settings') ? 'text-white' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              Settings
+            </Link>
+
             <Link
               to="/partners"
               className={`text-sm font-medium transition-colors ${
@@ -52,6 +66,7 @@ export default function Header() {
             >
               Partners
             </Link>
+
             <Link
               to="/about"
               className={`text-sm font-medium transition-colors ${
@@ -60,6 +75,27 @@ export default function Header() {
             >
               About
             </Link>
+
+            {session ? (
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-1.5 text-sm font-medium text-gray-400 hover:text-white transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className={`text-sm font-medium transition-colors ${
+                  isActive('/login') ? 'text-white' : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                Doctor Login
+              </Link>
+            )}
+
+            {/* CTA BUTTON */}
             <Link
               to="/partners"
               className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-medium text-sm hover:shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-105"
@@ -68,6 +104,7 @@ export default function Header() {
             </Link>
           </div>
 
+          {/* MOBILE BUTTON */}
           <div className="md:hidden">
             <Link
               to="/partners"
@@ -76,6 +113,7 @@ export default function Header() {
               Partner
             </Link>
           </div>
+          
         </div>
       </nav>
     </header>

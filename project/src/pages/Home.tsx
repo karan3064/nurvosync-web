@@ -13,421 +13,323 @@ import {
   ArrowRight,
   Check,
   AlertCircle,
+  Play,
+  Bluetooth,
+  Stethoscope,
+  FileHeart,
+  Database
 } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900">
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-600/10 via-transparent to-transparent" />
+    <div className="min-h-screen bg-black selection:bg-cyan-500/30">
+      
+      {/* --- HERO SECTION --- */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12">
+        {/* Animated Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse delay-700" />
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-teal-900/10 rounded-full blur-[120px]" />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 mb-8">
-            <Zap className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm text-gray-300">Smart Footwear Intelligence Platform</span>
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Hero Text */}
+          <div className="text-center lg:text-left z-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-950/30 backdrop-blur-md rounded-full border border-teal-500/30 mb-8 shadow-[0_0_20px_rgba(20,184,166,0.2)]">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
+              </span>
+              <span className="text-sm font-medium text-teal-200 tracking-wide">FDA-Registered Class II Medical Device</span>
+            </div>
+
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight text-white">
+              Clinical-Grade <br />
+              <span className="bg-gradient-to-r from-teal-400 via-cyan-500 to-blue-600 bg-clip-text text-transparent">
+                Gait Analysis.
+              </span>
+            </h1>
+
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed font-light">
+              NurvoSync bridges the gap between the clinic and the real world. 
+              Monitor rehabilitation, detect neuropathy, and track orthopedic outcomes with 
+              laboratory precision—remotely.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <Link
+                to="/partners"
+                className="w-full sm:w-auto px-8 py-4 bg-teal-600 hover:bg-teal-500 text-white rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-[0_0_40px_rgba(20,184,166,0.3)] flex items-center justify-center gap-2"
+              >
+                For Clinics
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                to="/demo"
+                className="w-full sm:w-auto px-8 py-4 bg-white/5 backdrop-blur-xl text-white rounded-full font-semibold text-lg border border-white/10 hover:bg-white/10 transition-all flex items-center justify-center gap-2 group"
+              >
+                <FileHeart className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" />
+                View Clinical Data
+              </Link>
+            </div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-              Turn Everyday Shoes
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              into Smart Footwear
-            </span>
-          </h1>
+          {/* Hero Visual - SMART INSOLE FOCUS */}
+          <div className="relative z-10 lg:h-[600px] flex items-center justify-center">
+            {/* Glowing ring behind insole */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[120%] bg-gradient-to-tr from-teal-500/10 to-blue-600/10 rounded-full blur-3xl" />
+            
+            <GlassCard className="relative p-2 border-teal-500/20 rotate-[-5deg] hover:rotate-0 transition-transform duration-700 ease-out bg-black/40">
+               {/* Smart Insole Image */}
+               <img 
+                 src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?q=80&w=2079&auto=format&fit=crop" 
+                 alt="Medical Smart Insole Sensor Array" 
+                 className="rounded-2xl w-full max-w-lg object-cover shadow-2xl shadow-teal-900/30 border border-white/5 grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+               />
+               
+               {/* Floating Clinical Metrics */}
+               <div className="absolute -right-6 top-20 bg-black/90 backdrop-blur-md border border-teal-900/50 p-4 rounded-xl shadow-xl animate-float">
+                  <div className="flex items-center gap-3">
+                    <Activity className="text-teal-400 w-5 h-5" />
+                    <div>
+                      <div className="text-[10px] text-gray-400 uppercase tracking-wider">Plantar Pressure</div>
+                      <div className="text-white font-mono font-bold">120 kPa <span className="text-teal-500 text-xs">▼ Normal</span></div>
+                    </div>
+                  </div>
+               </div>
 
-          <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto mb-12 leading-relaxed">
-            NurvoSync is a smart insole platform delivering comfort, balance, movement, and footwear
-            usage insights — without being a medical device.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link
-              to="/partners"
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:shadow-blue-500/40 transition-all transform hover:scale-105 flex items-center gap-2"
-            >
-              Partner With NurvoSync
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link
-              to="/demo"
-              className="px-8 py-4 bg-white/10 backdrop-blur-xl text-white rounded-xl font-semibold text-lg border border-white/20 hover:bg-white/20 transition-all transform hover:scale-105"
-            >
-              View Live Demo
-            </Link>
-          </div>
-
-          <div className="relative max-w-5xl mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-500/30 to-transparent blur-3xl" />
-            <GlassCard className="p-8 relative overflow-hidden">
-              <div className="absolute inset-0 opacity-30">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
-              </div>
-              <div className="aspect-video bg-gradient-to-br from-blue-900/30 to-cyan-900/30 rounded-2xl flex items-center justify-center relative">
-                <svg
-                  viewBox="0 0 400 300"
-                  className="w-full h-full max-w-md animate-float"
-                >
-                  <defs>
-                    <linearGradient id="insuleFill" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="rgb(34, 211, 238)" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="rgb(59, 130, 246)" stopOpacity="0.6" />
-                    </linearGradient>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                      <feMerge>
-                        <feMergeNode in="coloredBlur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-
-                  <ellipse cx="200" cy="150" rx="140" ry="100" fill="url(#insuleFill)" filter="url(#glow)" />
-
-                  <circle cx="120" cy="100" r="8" fill="rgb(34, 211, 238)" opacity="0.9" />
-                  <circle cx="160" cy="80" r="6" fill="rgb(59, 130, 246)" opacity="0.8" />
-                  <circle cx="200" cy="70" r="7" fill="rgb(34, 211, 238)" opacity="0.9" />
-                  <circle cx="240" cy="85" r="6" fill="rgb(59, 130, 246)" opacity="0.8" />
-                  <circle cx="280" cy="110" r="8" fill="rgb(34, 211, 238)" opacity="0.9" />
-
-                  <circle cx="100" cy="150" r="7" fill="rgb(59, 130, 246)" opacity="0.8" />
-                  <circle cx="300" cy="150" r="7" fill="rgb(59, 130, 246)" opacity="0.8" />
-
-                  <circle cx="140" cy="200" r="6" fill="rgb(34, 211, 238)" opacity="0.9" />
-                  <circle cx="200" cy="220" r="8" fill="rgb(59, 130, 246)" opacity="0.8" />
-                  <circle cx="260" cy="200" r="6" fill="rgb(34, 211, 238)" opacity="0.9" />
-
-                  <path d="M 140 130 Q 180 110 220 130" stroke="rgb(34, 211, 238)" strokeWidth="2" fill="none" opacity="0.6" />
-                  <path d="M 160 160 Q 200 150 240 160" stroke="rgb(59, 130, 246)" strokeWidth="2" fill="none" opacity="0.6" />
-                </svg>
-              </div>
+               <div className="absolute -left-6 bottom-20 bg-black/90 backdrop-blur-md border border-teal-900/50 p-4 rounded-xl shadow-xl animate-float delay-700">
+                  <div className="flex items-center gap-3">
+                    <Database className="text-blue-400 w-5 h-5" />
+                    <div>
+                      <div className="text-[10px] text-gray-400 uppercase tracking-wider">Sampling Rate</div>
+                      <div className="text-white font-mono font-bold">200 Hz</div>
+                    </div>
+                  </div>
+               </div>
             </GlassCard>
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-6 lg:px-8">
+      {/* --- CLINICAL PROBLEM SECTION --- */}
+      <section className="py-24 px-6 lg:px-8 bg-gray-900/30 border-y border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              The Footwear Data Gap
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              The Gap in Patient Monitoring
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Shoemakers face critical challenges in understanding how their products perform in
-              real-world use
+              Clinicians are forced to rely on brief in-office observations and subjective patient reports. 
+              True pathology happens in the real world, not just the exam room.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              {
-                icon: BarChart3,
-                title: 'No Usage Data',
-                description: 'Footwear brands lack real-world usage insights',
-              },
-              {
-                icon: Activity,
-                title: 'Subjective Feedback',
-                description: 'Comfort feedback is inconsistent and unreliable',
-              },
-              {
-                icon: TrendingUp,
-                title: 'Invisible Patterns',
-                description: 'Shoe wear patterns remain hidden until too late',
-              },
-              {
-                icon: Layers,
-                title: 'Limited Differentiation',
-                description: 'Hard to stand out in competitive footwear market',
-              },
+              { icon: Activity, title: 'Intermittent Data', desc: 'In-clinic gait analysis only captures <1% of a patient’s actual movement profile.' },
+              { icon: FileHeart, title: 'Subjective Reporting', desc: 'Patient memory of pain events and activity levels is notoriously unreliable.' },
+              { icon: AlertCircle, title: 'Hidden Deterioration', desc: 'Neuropathic ulcers and gait asymmetry often develop unnoticed until critical.' },
+              { icon: Layers, title: 'Rehab Non-Compliance', desc: 'No objective way to verify if patients are following prescribed load-bearing protocols.' },
             ].map((item, idx) => (
-              <GlassCard key={idx} className="p-6" hover>
-                <div className="w-12 h-12 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-xl flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-red-400" />
+              <GlassCard key={idx} className="p-8 group hover:bg-white/5 transition-colors border-white/5">
+                <div className="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-teal-500/20 transition-colors">
+                  <item.icon className="w-7 h-7 text-gray-400 group-hover:text-teal-400 transition-colors" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-gray-400">{item.description}</p>
+                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-gray-400 leading-relaxed text-sm">{item.desc}</p>
               </GlassCard>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-6 lg:px-8 bg-gradient-to-b from-transparent via-blue-950/20 to-transparent">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* --- SOLUTION SECTION (Alternating Layout) --- */}
+      <section className="py-32 px-6 lg:px-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto space-y-32">
+          
+          {/* Feature 1: Medical Hardware */}
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="relative group">
+               <div className="absolute inset-0 bg-gradient-to-r from-teal-800 to-blue-900 rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity" />
+               <img 
+                 src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Internal Sensor Components" 
+                 className="relative rounded-3xl shadow-2xl border border-white/10 w-full object-cover h-[500px]"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent rounded-3xl flex items-end p-8">
+                  <div className="flex items-center gap-2 text-teal-100 font-mono text-sm border border-teal-500/30 px-3 py-1 rounded-full bg-teal-950/50">
+                    <div className="w-2 h-2 bg-teal-500 rounded-full animate-pulse" />
+                    High-Fidelity Pressure Matrix
+                  </div>
+               </div>
+            </div>
+            
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20 mb-6">
-                <Zap className="w-4 h-4 text-blue-400" />
-                <span className="text-sm text-blue-300">The Solution</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-900/30 text-blue-300 rounded-lg text-sm font-semibold mb-6">
+                <Layers className="w-4 h-4" />
+                Medical Hardware
               </div>
-
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Same Shoes.
-                <br />
-                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  Smarter Experience.
-                </span>
+                Laboratory Precision, <br />
+                <span className="text-teal-500">Unobtrusive Form.</span>
               </h2>
-
-              <p className="text-xl text-gray-400 mb-8 leading-relaxed">
-                NurvoSync transforms any shoe into an intelligent footwear system through smart
-                insoles and real-time analytics.
+              <p className="text-lg text-gray-400 mb-8">
+                Our ultra-thin sensor array fits into any orthopedic footwear. 
+                Engineered for continuous remote patient monitoring (RPM) with validated accuracy against force-plate standards.
               </p>
-
-              <div className="space-y-4">
-                {[
-                  'Smart insoles with pressure & motion sensors',
-                  'BLE-enabled connectivity',
-                  'Live web-based intelligence dashboard',
-                  'White-label ready for brands',
-                ].map((feature, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Check className="w-4 h-4 text-white" />
-                    </div>
-                    <span className="text-gray-300">{feature}</span>
-                  </div>
+              <ul className="space-y-4">
+                {['128-Point Capacitive Pressure Sensors', '6-Axis IMU for Gait Kinematics', 'Antimicrobial & Hypoallergenic Surface'].map((feat, i) => (
+                   <li key={i} className="flex items-center gap-3 text-gray-300">
+                     <div className="w-6 h-6 rounded-full bg-teal-500/20 flex items-center justify-center">
+                       <Check className="w-3.5 h-3.5 text-teal-400" />
+                     </div>
+                     {feat}
+                   </li>
                 ))}
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 blur-3xl" />
-              <GlassCard className="p-8 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-40">
-                  <div className="absolute top-0 right-0 w-72 h-72 bg-blue-500 rounded-full blur-3xl" />
-                  <div className="absolute bottom-0 left-0 w-72 h-72 bg-cyan-500 rounded-full blur-3xl" />
-                </div>
-                <div className="aspect-square bg-gradient-to-br from-blue-900/30 to-cyan-900/30 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                  <svg viewBox="0 0 300 350" className="w-full h-full max-w-xs animate-float delay-200">
-                    <defs>
-                      <linearGradient id="shoeFill" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="rgb(34, 211, 238)" stopOpacity="0.9" />
-                        <stop offset="100%" stopColor="rgb(59, 130, 246)" stopOpacity="0.7" />
-                      </linearGradient>
-                      <filter id="shadowFilter">
-                        <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-                        <feOffset dx="0" dy="4" result="offsetblur" />
-                        <feComponentTransfer>
-                          <feFuncA type="linear" slope="0.3" />
-                        </feComponentTransfer>
-                        <feMerge>
-                          <feMergeNode />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-
-                    <path d="M 80 150 Q 80 120 120 100 L 220 100 Q 240 110 240 130 L 240 200 Q 240 230 200 250 L 120 250 Q 80 230 80 200 Z" fill="url(#shoeFill)" filter="url(#shadowFilter)" />
-
-                    <ellipse cx="150" cy="175" rx="65" ry="40" fill="rgb(34, 211, 238)" opacity="0.6" />
-
-                    <circle cx="110" cy="145" r="5" fill="rgb(34, 211, 238)" opacity="0.9" />
-                    <circle cx="140" cy="130" r="6" fill="rgb(59, 130, 246)" opacity="0.8" />
-                    <circle cx="170" cy="125" r="5" fill="rgb(34, 211, 238)" opacity="0.9" />
-                    <circle cx="200" cy="135" r="6" fill="rgb(59, 130, 246)" opacity="0.8" />
-
-                    <circle cx="100" cy="180" r="5" fill="rgb(59, 130, 246)" opacity="0.8" />
-                    <circle cx="200" cy="180" r="5" fill="rgb(59, 130, 246)" opacity="0.8" />
-
-                    <circle cx="130" cy="210" r="5" fill="rgb(34, 211, 238)" opacity="0.9" />
-                    <circle cx="170" cy="210" r="5" fill="rgb(34, 211, 238)" opacity="0.9" />
-
-                    <text x="150" y="280" textAnchor="middle" fontSize="12" fill="rgb(34, 211, 238)" opacity="0.7">Smart Insole</text>
-                  </svg>
-                </div>
-              </GlassCard>
+              </ul>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="py-24 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Footwear Intelligence Features
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Comprehensive insights for modern footwear innovation
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Gauge,
-                title: 'Comfort & Fit',
-                features: ['Pressure distribution visualization', 'Left vs right comparison'],
-              },
-              {
-                icon: Activity,
-                title: 'Movement & Balance',
-                features: ['Balance & symmetry insights', 'Walking pattern insights'],
-              },
-              {
-                icon: BarChart3,
-                title: 'Footwear Usage',
-                features: ['Shoe usage analytics', 'Wear estimation', 'Multi-shoe comparison'],
-              },
-              {
-                icon: Zap,
-                title: 'Smart Experience',
-                features: ['Comfort score', 'Live web dashboard'],
-              },
-              {
-                icon: Users,
-                title: 'White-Label Ready',
-                features: ['Custom branding', 'Brand integration'],
-              },
-              {
-                icon: Shield,
-                title: 'Non-Medical Focus',
-                features: ['Lifestyle insights only', 'No diagnosis claims'],
-              },
-            ].map((category, idx) => (
-              <GlassCard key={idx} className="p-6" hover>
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center mb-4">
-                  <category.icon className="w-7 h-7 text-cyan-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-3">{category.title}</h3>
-                <ul className="space-y-2">
-                  {category.features.map((feature, fidx) => (
-                    <li key={fidx} className="flex items-start gap-2 text-gray-400 text-sm">
-                      <Check className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </GlassCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 px-6 lg:px-8 bg-gradient-to-b from-transparent via-cyan-950/20 to-transparent">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">How It Works</h2>
-            <p className="text-xl text-gray-400">Simple integration, powerful insights</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Layers,
-                step: '01',
-                title: 'Insert Insole',
-                description: 'Smart insole fits seamlessly inside any shoe',
-              },
-              {
-                icon: Smartphone,
-                step: '02',
-                title: 'Connect via BLE',
-                description: 'Connects wirelessly to smartphone',
-              },
-              {
-                icon: BarChart3,
-                step: '03',
-                title: 'View Insights',
-                description: 'Live data appears on web dashboard',
-              },
-            ].map((step, idx) => (
-              <div key={idx} className="relative">
-                <GlassCard className="p-8 text-center h-full" hover>
-                  <div className="text-5xl font-bold text-blue-500/20 mb-4">{step.step}</div>
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                    <step.icon className="w-8 h-8 text-cyan-400" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-                  <p className="text-gray-400">{step.description}</p>
-                </GlassCard>
-                {idx < 2 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ArrowRight className="w-8 h-8 text-blue-500/30" />
-                  </div>
-                )}
+          {/* Feature 2: Clinical Dashboard */}
+          <div className="grid lg:grid-cols-2 gap-16 items-center lg:flex-row-reverse">
+            <div className="order-2 lg:order-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-teal-900/30 text-teal-300 rounded-lg text-sm font-semibold mb-6">
+                <Stethoscope className="w-4 h-4" />
+                Clinical Decisions
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <GlassCard className="p-8 md:p-12 border-blue-500/30">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                <AlertCircle className="w-6 h-6 text-blue-400" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-2">Non-Medical Positioning</h3>
-                <p className="text-gray-400">Clear focus on lifestyle and footwear innovation</p>
-              </div>
-            </div>
-
-            <div className="space-y-4 mb-6">
-              {[
-                'Lifestyle & footwear insights only',
-                'No diagnosis or treatment',
-                'No medical claims',
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                  <span className="text-gray-300">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-blue-950/30 border border-blue-500/30 rounded-xl p-6">
-              <p className="text-sm text-blue-300 italic text-center">
-                NurvoSync provides lifestyle and footwear insights only and is not intended for
-                medical use.
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Actionable Insights <br />
+                <span className="text-blue-500">For Rehabilitation.</span>
+              </h2>
+              <p className="text-lg text-gray-400 mb-8">
+                The Provider Dashboard aggregates patient data into clinical metrics: asymmetry indices, 
+                cumulative load monitoring, and ulcer risk heatmaps. Exportable to major EMR systems.
               </p>
+              <Link to="/demo" className="text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-2 group">
+                See Provider Dashboard <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
+
+            <div className="relative order-1 lg:order-2 perspective-1000">
+               {/* Abstract Dashboard Representation */}
+               <div className="relative transform lg:rotate-y-[-10deg] lg:rotate-x-[5deg] transition-transform duration-500 hover:transform-none">
+                 <GlassCard className="p-0 overflow-hidden border-teal-500/30 bg-black/80">
+                    <div className="bg-gray-900/50 border-b border-white/10 p-4 flex gap-2">
+                       <div className="w-3 h-3 rounded-full bg-red-500/50" />
+                       <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+                       <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                    </div>
+                    {/* Medical Graph Visual */}
+                    <img 
+                      src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop" 
+                      alt="Clinical Analytics Interface" 
+                      className="w-full opacity-90 mix-blend-luminosity hover:mix-blend-normal transition-all"
+                    />
+                 </GlassCard>
+               </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- HOW IT WORKS (Medical Workflow) --- */}
+      <section className="py-24 px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-black to-gray-900">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold text-white mb-4">Seamless Clinical Integration</h2>
+            <p className="text-gray-400">Deploying remote monitoring in your practice is simple.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 relative">
+            <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-blue-900 via-teal-500 to-blue-900 opacity-30 border-t border-dashed border-white/20" />
+
+            {[
+              { icon: Layers, step: '01', title: 'Prescribe & Fit', desc: 'Clinician fits the sensor insole to the patient’s existing orthopedic shoe.', img: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop' },
+              { icon: Bluetooth, step: '02', title: 'Continuous RPM', desc: 'Data is securely transmitted via the patient app to the cloud.', img: 'https://images.unsplash.com/photo-1576091160550-217358c71612?q=80&w=2070&auto=format&fit=crop' },
+              { icon: BarChart3, step: '03', title: 'Intervention', desc: 'Receive alerts for gait deterioration or compliance issues instantly.', img: 'https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2070&auto=format&fit=crop' },
+            ].map((step, idx) => (
+              <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
+                <div className="w-24 h-24 rounded-2xl bg-gray-900 border border-white/10 p-1 mb-6 shadow-2xl shadow-blue-900/20 group-hover:-translate-y-2 transition-transform duration-300">
+                  <img src={step.img} alt={step.title} className="w-full h-full object-cover rounded-xl opacity-60 group-hover:opacity-100 transition-opacity grayscale hover:grayscale-0" />
+                </div>
+                <div className="inline-block px-3 py-1 bg-teal-600/20 text-teal-400 text-xs font-bold rounded-full mb-4">PHASE {step.step}</div>
+                <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                <p className="text-gray-400 text-sm max-w-xs">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- MEDICAL COMPLIANCE SECTION --- */}
+      <section className="py-16 px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          <GlassCard className="relative overflow-hidden border-teal-500/30 bg-teal-950/20">
+             <div className="absolute top-0 right-0 p-32 bg-teal-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+             <div className="relative p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
+                <div className="flex-shrink-0 w-20 h-20 bg-teal-500/10 rounded-full flex items-center justify-center border border-teal-500/20">
+                  <Shield className="w-10 h-10 text-teal-400" />
+                </div>
+                <div className="flex-grow text-center md:text-left">
+                  <h3 className="text-2xl font-bold text-white mb-2">Medical Grade & Compliant</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
+                    {['HIPAA Compliant', 'FDA Class II', 'ISO 13485', 'GDPR Secure'].map((cert, i) => (
+                        <div key={i} className="flex items-center gap-2 text-sm text-gray-300">
+                            <Check className="w-4 h-4 text-teal-400" /> {cert}
+                        </div>
+                    ))}
+                  </div>
+                </div>
+             </div>
           </GlassCard>
         </div>
       </section>
 
-      <section className="py-24 px-6 lg:px-8 bg-gradient-to-b from-transparent via-blue-950/30 to-transparent">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Let's Build the Next Generation
-            <br />
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              of Smart Footwear
-            </span>
-          </h2>
+      {/* --- CTA SECTION --- */}
+      <section className="relative py-32 px-6 lg:px-8 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+           <img 
+             src="https://images.unsplash.com/photo-1516574187841-693083f652eb?q=80&w=2070&auto=format&fit=crop" 
+             alt="Medical research lab" 
+             className="w-full h-full object-cover"
+           />
+           <div className="absolute inset-0 bg-blue-950/90 mix-blend-multiply" />
+           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+        </div>
 
-          <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
-            Join leading footwear brands in transforming the industry with intelligent insights
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
+            Elevate Your <br/>
+            <span className="text-teal-400">Standard of Care.</span>
+          </h2>
+          
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+            Partner with NurvoSync to bring validated remote gait analysis to your patients.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link
               to="/partners"
-              className="px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:shadow-blue-500/40 transition-all transform hover:scale-105 flex items-center gap-2"
+              className="w-full sm:w-auto px-10 py-5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl font-bold text-lg shadow-[0_0_30px_rgba(20,184,166,0.3)] transition-all transform hover:scale-105"
             >
-              Start a Partnership
-              <ArrowRight className="w-5 h-5" />
+              Partner with Us
             </Link>
             <Link
               to="/demo"
-              className="px-10 py-5 bg-white/10 backdrop-blur-xl text-white rounded-xl font-semibold text-lg border border-white/20 hover:bg-white/20 transition-all transform hover:scale-105"
+              className="w-full sm:w-auto px-10 py-5 bg-black/40 backdrop-blur-md text-white rounded-xl font-bold text-lg border border-white/20 hover:bg-white/20 transition-all"
             >
-              Book a Demo
+              Request Clinical Pilot
             </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function Footer() {
                 <Zap className="w-6 h-6 text-white" strokeWidth={2.5} />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                NurvoSync
+                SoleSync
               </span>
             </div>
             <p className="text-gray-400 text-sm max-w-md mb-4">
@@ -71,6 +71,14 @@ export default function Footer() {
             </p>
             <p className="text-gray-500 text-xs text-center md:text-right">
               Smart Footwear Intelligence Platform
+              <br />
+              <a href="https://poly.pizza/m/cs7k_ENAZjQ" target="_blank" rel="noreferrer" className="hover:text-gray-300 transition-colors">
+                "Trainer" by jeremy
+              </a>{' '}
+              via Poly Pizza, licensed{' '}
+              <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer" className="hover:text-gray-300 transition-colors">
+                CC BY 3.0
+              </a>
             </p>
           </div>
         </div>
