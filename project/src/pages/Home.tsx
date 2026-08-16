@@ -266,38 +266,32 @@ export default function Home() {
       </section>
 
       {/* --- CTA SECTION --- */}
-      <section className="relative py-32 px-6 lg:px-8 overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0">
-           <img 
-             src="https://images.unsplash.com/photo-1516574187841-693083f652eb?q=80&w=2070&auto=format&fit=crop" 
-             alt="Medical research lab" 
-             className="w-full h-full object-cover"
-           />
-           <div className="absolute inset-0 bg-blue-950/90 mix-blend-multiply" />
-           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+      <section className="relative py-32 px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-teal-600 via-cyan-600 to-blue-600">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px]" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
             Elevate Your <br/>
-            <span className="text-teal-400">Standard of Care.</span>
+            <span className="text-teal-100">Standard of Care.</span>
           </h2>
-          
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+
+          <p className="text-xl text-teal-50 mb-12 max-w-2xl mx-auto">
             Partner with NurvoSync to bring validated remote gait analysis to your patients.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link
               to="/partners"
-              className="w-full sm:w-auto px-10 py-5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl font-bold text-lg shadow-[0_0_30px_rgba(20,184,166,0.3)] transition-all transform hover:scale-105"
+              className="w-full sm:w-auto px-10 py-5 bg-white hover:bg-gray-50 text-teal-700 rounded-xl font-bold text-lg shadow-lg transition-all transform hover:scale-105"
             >
               Partner with Us
             </Link>
             <Link
               to="/demo"
-              className="w-full sm:w-auto px-10 py-5 bg-black/40 backdrop-blur-md text-white rounded-xl font-bold text-lg border border-white/20 hover:bg-white/20 transition-all"
+              className="w-full sm:w-auto px-10 py-5 bg-white/10 backdrop-blur-md text-white rounded-xl font-bold text-lg border border-white/30 hover:bg-white/20 transition-all"
             >
               Request Clinical Pilot
             </Link>
