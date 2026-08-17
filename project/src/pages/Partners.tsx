@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import {
   Handshake,
   Building2,
@@ -14,6 +15,7 @@ import {
   Smartphone
 } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
+import { staggerContainer, fadeUp, fadeUpSm, revealViewport } from '../lib/motionVariants';
 
 export default function Partners() {
   return (
@@ -26,13 +28,18 @@ export default function Partners() {
           <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-teal-200/60 rounded-full blur-[110px]" />
         </div>
         <div className="relative max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 backdrop-blur-xl rounded-full border border-teal-200 mb-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="show"
+            className="text-center mb-16"
+          >
+            <motion.div variants={fadeUpSm} className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 backdrop-blur-xl rounded-full border border-teal-200 mb-6">
               <Handshake className="w-4 h-4 text-teal-600" />
               <span className="text-sm text-teal-700">Clinical & Commercial Partnerships</span>
-            </div>
+            </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-bold mb-6">
               <span className="text-gray-900">
                 Deploy Clinical
               </span>
@@ -40,86 +47,110 @@ export default function Partners() {
               <span className="bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text text-transparent">
                 Intelligence at Scale.
               </span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <motion.p variants={fadeUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
               Empower your practice, lab, or research facility with the world's most advanced
               remote gait monitoring stack.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           {/* Partner Segments */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+            className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          >
             {/* Segment 1: Clinics */}
-            <GlassCard className="p-8 border-teal-100" hover>
-              <div className="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center mb-6">
-                <Stethoscope className="w-7 h-7 text-teal-600" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Providers & Clinics</h3>
-              <p className="text-gray-600 mb-4 text-sm">
-                Support remote patient monitoring workflows while improving patient outcomes.
-              </p>
-              <ul className="space-y-2">
-                {['Remote Patient Monitoring (RPM)', 'Post-Op Rehab Tracking', 'Diabetic Foot Risk Monitoring'].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-gray-700 text-xs">
-                    <Check className="w-3 h-3 text-teal-600" /> {item}
-                  </li>
-                ))}
-              </ul>
-            </GlassCard>
+            <motion.div variants={fadeUp}>
+              <GlassCard className="p-8 border-teal-100 h-full" hover>
+                <div className="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center mb-6">
+                  <Stethoscope className="w-7 h-7 text-teal-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Providers & Clinics</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Support remote patient monitoring workflows while improving patient outcomes.
+                </p>
+                <ul className="space-y-2">
+                  {['Remote Patient Monitoring (RPM)', 'Post-Op Rehab Tracking', 'Diabetic Foot Risk Monitoring'].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-gray-700 text-xs">
+                      <Check className="w-3 h-3 text-teal-600" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </GlassCard>
+            </motion.div>
 
             {/* Segment 2: Labs */}
-            <GlassCard className="p-8 border-blue-100" hover>
-              <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
-                <Building2 className="w-7 h-7 text-blue-600" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Orthotic Labs</h3>
-              <p className="text-gray-600 mb-4 text-sm">
-                Upgrade your custom orthotics into smart medical devices without changing your manufacturing.
-              </p>
-              <ul className="space-y-2">
-                {['White-Label Sensor Integration', 'Value-Added Product Tier', 'Fleet Management Dashboard'].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-gray-700 text-xs">
-                    <Check className="w-3 h-3 text-blue-600" /> {item}
-                  </li>
-                ))}
-              </ul>
-            </GlassCard>
+            <motion.div variants={fadeUp}>
+              <GlassCard className="p-8 border-blue-100 h-full" hover>
+                <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+                  <Building2 className="w-7 h-7 text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Orthotic Labs</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Upgrade your custom orthotics into smart medical devices without changing your manufacturing.
+                </p>
+                <ul className="space-y-2">
+                  {['White-Label Sensor Integration', 'Value-Added Product Tier', 'Fleet Management Dashboard'].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-gray-700 text-xs">
+                      <Check className="w-3 h-3 text-blue-600" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </GlassCard>
+            </motion.div>
 
             {/* Segment 3: Research */}
-            <GlassCard className="p-8 border-purple-100" hover>
-              <div className="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-6">
-                <Microscope className="w-7 h-7 text-purple-600" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Research & Trials</h3>
-              <p className="text-gray-600 mb-4 text-sm">
-                Gather gait data from participants in the real world, not just the lab.
-              </p>
-              <ul className="space-y-2">
-                {['Raw Sensor Data Access (CSV/API)', 'Longitudinal Studies', 'Configurable Sampling Rates'].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-gray-700 text-xs">
-                    <Check className="w-3 h-3 text-purple-600" /> {item}
-                  </li>
-                ))}
-              </ul>
-            </GlassCard>
-          </div>
+            <motion.div variants={fadeUp}>
+              <GlassCard className="p-8 border-purple-100 h-full" hover>
+                <div className="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-6">
+                  <Microscope className="w-7 h-7 text-purple-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Research & Trials</h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Gather gait data from participants in the real world, not just the lab.
+                </p>
+                <ul className="space-y-2">
+                  {['Raw Sensor Data Access (CSV/API)', 'Longitudinal Studies', 'Configurable Sampling Rates'].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-gray-700 text-xs">
+                      <Check className="w-3 h-3 text-purple-600" /> {item}
+                    </li>
+                  ))}
+                </ul>
+              </GlassCard>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* --- INTEGRATION ARCHITECTURE --- */}
       <section className="py-20 px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+            className="text-center mb-16"
+          >
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Seamless Clinical Integration
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
               Our SDKs and APIs are designed to flow directly into your EMR/EHR systems.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+          >
             {[
               {
                 icon: FileHeart,
@@ -154,21 +185,23 @@ export default function Partners() {
                 iconColor: 'text-orange-600',
               },
             ].map((feature, idx) => (
-              <GlassCard key={idx} className="p-6 relative overflow-hidden group" hover>
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                <div className="flex items-start justify-between mb-4 relative z-10">
-                  <div className={`w-12 h-12 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center group-hover:animate-glow-pulse`}>
-                    <feature.icon className={`w-6 h-6 ${feature.iconColor}`} />
+              <motion.div key={idx} variants={fadeUp}>
+                <GlassCard className="p-6 relative overflow-hidden group h-full" hover>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  <div className="flex items-start justify-between mb-4 relative z-10">
+                    <div className={`w-12 h-12 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center group-hover:animate-glow-pulse`}>
+                      <feature.icon className={`w-6 h-6 ${feature.iconColor}`} />
+                    </div>
+                    <span className="px-2 py-1 bg-gray-100 border border-gray-200 text-gray-600 text-[10px] uppercase tracking-wider rounded-md font-semibold">
+                      {feature.badge}
+                    </span>
                   </div>
-                  <span className="px-2 py-1 bg-gray-100 border border-gray-200 text-gray-600 text-[10px] uppercase tracking-wider rounded-md font-semibold">
-                    {feature.badge}
-                  </span>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 relative z-10">{feature.title}</h3>
-                <p className="text-gray-600 text-sm relative z-10">{feature.description}</p>
-              </GlassCard>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2 relative z-10">{feature.title}</h3>
+                  <p className="text-gray-600 text-sm relative z-10">{feature.description}</p>
+                </GlassCard>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
         </div>
       </section>
@@ -180,20 +213,26 @@ export default function Partners() {
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-teal-200/40 rounded-full blur-[100px]" />
 
-            <div className="relative z-10">
-              <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-blue-100 rounded-2xl flex items-center justify-center mb-6 mx-auto border border-teal-200">
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={revealViewport}
+              className="relative z-10"
+            >
+              <motion.div variants={fadeUp} className="w-20 h-20 bg-gradient-to-br from-teal-100 to-blue-100 rounded-2xl flex items-center justify-center mb-6 mx-auto border border-teal-200">
                 <Handshake className="w-10 h-10 text-teal-600" />
-              </div>
+              </motion.div>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Validate Your Technology. <br/> Improve Patient Care.
-              </h2>
+              </motion.h2>
 
-              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              <motion.p variants={fadeUp} className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
                 Join the leading network of podiatrists, orthopedic surgeons, and medical device manufacturers using NurvoSync.
-              </p>
+              </motion.p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
                   href="mailto:partners@nurvosync.com"
                   className="px-8 py-4 bg-gradient-to-r from-teal-600 to-blue-600 text-white rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-teal-500/30 transition-all transform hover:scale-105 flex items-center gap-2"
@@ -208,9 +247,9 @@ export default function Partners() {
                   <FileHeart className="w-5 h-5" />
                   Read Clinical Whitepaper
                 </a>
-              </div>
+              </motion.div>
 
-            </div>
+            </motion.div>
           </GlassCard>
         </div>
       </section>

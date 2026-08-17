@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { staggerContainer, fadeUp, fadeUpSm, fadeInScale, revealViewport } from '../lib/motionVariants';
 import {
   Footprints,
   Activity,
@@ -36,29 +38,34 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
 
           {/* Hero Text */}
-          <div className="text-center lg:text-left z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 backdrop-blur-md rounded-full border border-teal-200 mb-8">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="show"
+            className="text-center lg:text-left z-10"
+          >
+            <motion.div variants={fadeUpSm} className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 backdrop-blur-md rounded-full border border-teal-200 mb-8">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
               </span>
               <span className="text-sm font-medium text-teal-700 tracking-wide">Real-Time Remote Gait Monitoring</span>
-            </div>
+            </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight text-gray-900">
+            <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight text-gray-900">
               Clinical-Grade <br />
               <span className="bg-gradient-to-r from-teal-500 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
                 Gait Analysis.
               </span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed font-light">
+            <motion.p variants={fadeUp} className="text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed font-light">
               NurvoSync bridges the gap between the clinic and the real world.
               Monitor rehabilitation, detect neuropathy, and track orthopedic outcomes with
               laboratory precision—remotely.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Link
                 to="/partners"
                 className="w-full sm:w-auto px-8 py-4 bg-teal-600 hover:bg-teal-500 text-white rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-teal-500/30 flex items-center justify-center gap-2"
@@ -73,11 +80,15 @@ export default function Home() {
                 <FileHeart className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" />
                 View Clinical Data
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Hero Visual - SMART INSOLE FOCUS */}
-          <div className="relative z-10 lg:h-[600px] flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-10 lg:h-[600px] flex items-center justify-center">
             {/* Glowing ring behind insole */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[120%] bg-gradient-to-tr from-teal-100 to-blue-100 rounded-full blur-3xl" />
 
@@ -110,39 +121,53 @@ export default function Home() {
                   </div>
                </div>
             </GlassCard>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* --- CLINICAL PROBLEM SECTION --- */}
       <section className="py-24 px-6 lg:px-8 bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+            className="text-center mb-16"
+          >
+            <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
               The Gap in Patient Monitoring
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
               Clinicians are forced to rely on brief in-office observations and subjective patient reports.
               True pathology happens in the real world, not just the exam room.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {[
               { icon: Activity, title: 'Intermittent Data', desc: 'In-clinic gait analysis only captures <1% of a patient’s actual movement profile.' },
               { icon: FileHeart, title: 'Subjective Reporting', desc: 'Patient memory of pain events and activity levels is notoriously unreliable.' },
               { icon: AlertCircle, title: 'Hidden Deterioration', desc: 'Neuropathic ulcers and gait asymmetry often develop unnoticed until critical.' },
               { icon: Layers, title: 'Rehab Non-Compliance', desc: 'No objective way to verify if patients are following prescribed load-bearing protocols.' },
             ].map((item, idx) => (
-              <GlassCard key={idx} className="p-8 group hover:bg-gray-50 transition-colors">
-                <div className="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-teal-50 transition-colors">
-                  <item.icon className="w-7 h-7 text-gray-500 group-hover:text-teal-600 transition-colors" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed text-sm">{item.desc}</p>
-              </GlassCard>
+              <motion.div key={idx} variants={fadeUp}>
+                <GlassCard className="p-8 group hover:bg-gray-50 transition-colors h-full">
+                  <div className="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-teal-50 transition-colors">
+                    <item.icon className="w-7 h-7 text-gray-500 group-hover:text-teal-600 transition-colors" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm">{item.desc}</p>
+                </GlassCard>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -151,8 +176,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto space-y-32">
           
           {/* Feature 1: Medical Hardware */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative group">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+            className="grid lg:grid-cols-2 gap-16 items-center"
+          >
+            <motion.div variants={fadeInScale} className="relative group">
                <div className="absolute inset-0 bg-gradient-to-r from-teal-100 to-blue-100 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity" />
                <img
                  src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
@@ -165,9 +196,9 @@ export default function Home() {
                     High-Fidelity Pressure Matrix
                   </div>
                </div>
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div variants={fadeUp}>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-sm font-semibold mb-6">
                 <Layers className="w-4 h-4" />
                 Medical Hardware
@@ -190,12 +221,18 @@ export default function Home() {
                    </li>
                 ))}
               </ul>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Feature 2: Clinical Dashboard */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center lg:flex-row-reverse">
-            <div className="order-2 lg:order-1">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+            className="grid lg:grid-cols-2 gap-16 items-center lg:flex-row-reverse"
+          >
+            <motion.div variants={fadeUp} className="order-2 lg:order-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-teal-50 text-teal-700 rounded-lg text-sm font-semibold mb-6">
                 <Stethoscope className="w-4 h-4" />
                 Clinical Decisions
@@ -211,9 +248,9 @@ export default function Home() {
               <Link to="/demo" className="text-teal-600 hover:text-teal-700 font-semibold flex items-center gap-2 group">
                 See Provider Dashboard <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-            </div>
+            </motion.div>
 
-            <div className="relative order-1 lg:order-2 perspective-1000">
+            <motion.div variants={fadeInScale} className="relative order-1 lg:order-2 perspective-1000">
                {/* Abstract Dashboard Representation */}
                <div className="relative transform lg:rotate-y-[-10deg] lg:rotate-x-[5deg] transition-transform duration-500 hover:transform-none">
                  <GlassCard className="p-0 overflow-hidden">
@@ -230,8 +267,8 @@ export default function Home() {
                     />
                  </GlassCard>
                </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
         </div>
       </section>
@@ -244,7 +281,13 @@ export default function Home() {
             <p className="text-gray-600">Deploying remote monitoring in your practice is simple.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 relative">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={revealViewport}
+            className="grid md:grid-cols-3 gap-8 relative"
+          >
             <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-blue-100 via-teal-400 to-blue-100 opacity-60" />
 
             {[
@@ -252,16 +295,16 @@ export default function Home() {
               { icon: Bluetooth, step: '02', title: 'Continuous RPM', desc: 'Data is securely transmitted via the patient app to the cloud.', img: 'https://images.unsplash.com/photo-1576091160550-217358c71612?q=80&w=2070&auto=format&fit=crop' },
               { icon: BarChart3, step: '03', title: 'Intervention', desc: 'Receive alerts for gait deterioration or compliance issues instantly.', img: 'https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2070&auto=format&fit=crop' },
             ].map((step, idx) => (
-              <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
+              <motion.div key={idx} variants={fadeUp} className="relative z-10 flex flex-col items-center text-center group">
                 <div className="w-24 h-24 rounded-2xl bg-white border border-gray-200 p-1 mb-6 shadow-md group-hover:-translate-y-2 transition-transform duration-300">
                   <img src={step.img} alt={step.title} className="w-full h-full object-cover rounded-xl opacity-70 group-hover:opacity-100 transition-opacity grayscale hover:grayscale-0" />
                 </div>
                 <div className="inline-block px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold rounded-full mb-4">PHASE {step.step}</div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
                 <p className="text-gray-600 text-sm max-w-xs">{step.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -272,17 +315,23 @@ export default function Home() {
           <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px]" />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={revealViewport}
+          className="relative z-10 max-w-4xl mx-auto text-center"
+        >
+          <motion.h2 variants={fadeUp} className="text-5xl md:text-6xl font-bold text-white mb-8">
             Elevate Your <br/>
             <span className="text-teal-100">Standard of Care.</span>
-          </h2>
+          </motion.h2>
 
-          <p className="text-xl text-teal-50 mb-12 max-w-2xl mx-auto">
+          <motion.p variants={fadeUp} className="text-xl text-teal-50 mb-12 max-w-2xl mx-auto">
             Partner with NurvoSync to bring validated remote gait analysis to your patients.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link
               to="/partners"
               className="w-full sm:w-auto px-10 py-5 bg-white hover:bg-gray-50 text-teal-700 rounded-xl font-bold text-lg shadow-lg transition-all transform hover:scale-105"
@@ -295,8 +344,8 @@ export default function Home() {
             >
               Request Clinical Pilot
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
     </div>
