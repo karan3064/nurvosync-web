@@ -7,7 +7,10 @@
       },
       "dest": "/assets/$1"
     },
-    { "handle": "filesystem" },
+    {
+      "src": "^/(models/.*|favicon\\.svg|Shoe\\.glb|vite\\.svg)",
+      "dest": "/$1"
+    },
     {
       "src": ".*",
       "dest": "/index.html"
