@@ -3,6 +3,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Demo from './pages/Demo';
 import Login from './pages/Login';
@@ -15,6 +16,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="min-h-screen bg-white text-gray-900">
+          <ScrollToTop />
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
