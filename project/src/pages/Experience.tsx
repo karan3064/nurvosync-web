@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
 import ErrorBoundary from '../components/ErrorBoundary';
-import InsoleShowcase3D from '../components/InsoleShowcase3D';
 import HeatmapCanvas from '../components/HeatmapCanvas';
 import { staggerContainer, fadeUp, fadeUpSm, fadeInScale, revealViewport } from '../lib/motionVariants';
 
@@ -128,7 +127,7 @@ export default function Experience() {
             </motion.div>
           </motion.div>
 
-          {/* 3D SHOWCASE */}
+          {/* SHOE VISUAL */}
           <motion.div
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -136,12 +135,31 @@ export default function Experience() {
             className="relative"
           >
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-gradient-to-tr from-teal-100 to-blue-100 rounded-full blur-3xl" />
-            <GlassCard className="relative aspect-square overflow-hidden">
-              <ErrorBoundary compact>
-                <InsoleShowcase3D />
-              </ErrorBoundary>
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-gray-400 font-medium tracking-wide pointer-events-none">
-                Drag to rotate
+            <GlassCard className="relative p-2 rotate-[-3deg] hover:rotate-0 transition-transform duration-700 ease-out bg-white">
+              <img
+                src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?q=80&w=2079&auto=format&fit=crop"
+                alt="Smart insole embedded in orthopedic footwear"
+                className="rounded-2xl w-full object-cover shadow-xl border border-gray-100"
+              />
+
+              <div className="absolute -right-6 top-10 bg-white border border-teal-100 p-4 rounded-xl shadow-lg animate-float">
+                <div className="flex items-center gap-3">
+                  <Layers className="text-teal-500 w-5 h-5" />
+                  <div>
+                    <div className="text-[10px] text-gray-500 uppercase tracking-wider">Pressure Points</div>
+                    <div className="text-gray-900 font-mono font-bold">128</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute -left-6 bottom-10 bg-white border border-teal-100 p-4 rounded-xl shadow-lg animate-float delay-700">
+                <div className="flex items-center gap-3">
+                  <Activity className="text-blue-500 w-5 h-5" />
+                  <div>
+                    <div className="text-[10px] text-gray-500 uppercase tracking-wider">Sampling Rate</div>
+                    <div className="text-gray-900 font-mono font-bold">200 Hz</div>
+                  </div>
+                </div>
               </div>
             </GlassCard>
           </motion.div>
@@ -202,7 +220,7 @@ export default function Experience() {
             <GlassCard className="relative p-6 max-w-sm mx-auto">
               <div className="h-80">
                 <ErrorBoundary compact>
-                  <HeatmapCanvas pressure={pressure} side="left" />
+                  <HeatmapCanvas pressure={pressure} side="left" editable={false} />
                 </ErrorBoundary>
               </div>
             </GlassCard>

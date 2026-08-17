@@ -4,9 +4,10 @@ import { Settings2, Plus, Minus, Check, RotateCcw } from "lucide-react";
 type Point = { x: number; y: number };
 
 type Props = {
-  pressure: number[]; 
+  pressure: number[];
   onLayoutChange?: (points: Point[]) => void;
   side?: "left" | "right"; // <--- ADDED PROP
+  editable?: boolean;
 };
 
 const WIDTH = 200;
@@ -50,7 +51,7 @@ function drawFootShape(ctx: CanvasRenderingContext2D) {
 }
 
 // Default to "left" if not specified
-export default function HeatmapCanvas({ pressure, onLayoutChange, side = "left" }: Props) {
+export default function HeatmapCanvas({ pressure, onLayoutChange, side = "left", editable = true }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -202,22 +203,26 @@ export default function HeatmapCanvas({ pressure, onLayoutChange, side = "left" 
     <div className="relative w-full h-full flex flex-col">
         
         {/* --- TOOLBAR --- */}
-        <div className={`absolute top-2 left-2 right-2 z-50 flex gap-2 transition-all ${isEditing ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
-            <div className="bg-white/95 backdrop-blur border border-gray-200 rounded-lg p-1 flex gap-1 shadow-xl">
-                <button onClick={addSensor} className="p-2 hover:bg-gray-100 rounded-md text-green-600"><Plus size={16}/></button>
-                <button onClick={removeSensor} className="p-2 hover:bg-gray-100 rounded-md text-red-600"><Minus size={16}/></button>
-                <div className="w-px bg-gray-200 mx-1"></div>
-                <button onClick={resetLayout} className="p-2 hover:bg-gray-100 rounded-md text-gray-600"><RotateCcw size={16}/></button>
-            </div>
-        </div>
+        {editable && (
+          <div className={`absolute top-2 left-2 right-2 z-50 flex gap-2 transition-all ${isEditing ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+              <div className="bg-white/95 backdrop-blur border border-gray-200 rounded-lg p-1 flex gap-1 shadow-xl">
+                  <button onClick={addSensor} className="p-2 hover:bg-gray-100 rounded-md text-green-600"><Plus size={16}/></button>
+                  <button onClick={removeSensor} className="p-2 hover:bg-gray-100 rounded-md text-red-600"><Minus size={16}/></button>
+                  <div className="w-px bg-gray-200 mx-1"></div>
+                  <button onClick={resetLayout} className="p-2 hover:bg-gray-100 rounded-md text-gray-600"><RotateCcw size={16}/></button>
+              </div>
+          </div>
+        )}
 
         {/* --- EDIT BUTTON --- */}
-        <button
-            onClick={() => setIsEditing(!isEditing)}
-            className={`absolute bottom-4 right-4 z-50 p-3 rounded-full shadow-lg border transition-all ${isEditing ? 'bg-blue-600 border-blue-400 text-white' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
-        >
-            {isEditing ? <Check size={20} /> : <Settings2 size={20} />}
-        </button>
+        {editable && (
+          <button
+              onClick={() => setIsEditing(!isEditing)}
+              className={`absolute bottom-4 right-4 z-50 p-3 rounded-full shadow-lg border transition-all ${isEditing ? 'bg-blue-600 border-blue-400 text-white' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
+          >
+              {isEditing ? <Check size={20} /> : <Settings2 size={20} />}
+          </button>
+        )}
 
         {/* --- CANVAS --- */}
         <div
