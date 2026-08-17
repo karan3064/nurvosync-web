@@ -18,7 +18,10 @@ import GlassCard from '../components/GlassCard';
 import ErrorBoundary from '../components/ErrorBoundary';
 import HeatmapCanvas from '../components/HeatmapCanvas';
 import InsoleDiagram from '../components/InsoleDiagram';
+import ShoeLayers from '../components/ShoeLayers';
 import { staggerContainer, fadeUp, fadeUpSm, fadeInScale, revealViewport } from '../lib/motionVariants';
+
+type ShoeStage = 'shoe' | 'exploded' | 'insole';
 
 const FEATURES = [
   {
@@ -78,7 +81,7 @@ function useSimulatedGaitPressure() {
 
 export default function Experience() {
   const pressure = useSimulatedGaitPressure();
-  const [showSensors, setShowSensors] = useState(false);
+  const [stage, setStage] = useState<ShoeStage>('shoe');
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const handleTiltMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -159,7 +162,7 @@ export default function Experience() {
             >
               <GlassCard className="relative p-2 overflow-hidden">
                 <AnimatePresence mode="wait">
-                  {!showSensors ? (
+                  {stage === 'shoe' && (
                     <motion.div
                       key="photo"
                       initial={{ opacity: 0 }}
@@ -193,7 +196,20 @@ export default function Experience() {
                         </div>
                       </div>
                     </motion.div>
-                  ) : (
+                  )}
+                  {stage === 'exploded' && (
+                    <motion.div
+                      key="exploded"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="aspect-square"
+                    >
+                      <ShoeLayers onSelectInsole={() => setStage('insole')} />
+                    </motion.div>
+                  )}
+                  {stage === 'insole' && (
                     <motion.div
                       key="diagram"
                       initial={{ opacity: 0 }}
@@ -211,17 +227,29 @@ export default function Experience() {
             </div>
 
             <p className="mt-3 text-center text-xs text-gray-400 font-medium tracking-wide">
-              Move your cursor over the shoe
+              {stage === 'shoe' && 'Move your cursor over the shoe'}
+              {stage === 'exploded' && 'Tap the insole layer to explore its sensors'}
+              {stage === 'insole' && 'Drag the card to look around'}
             </p>
 
             <div className="mt-4 flex justify-center">
-              <button
-                onClick={() => setShowSensors((v) => !v)}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-teal-200 text-teal-700 rounded-full font-semibold shadow-sm hover:shadow-md hover:border-teal-300 hover:scale-105 transition-all"
-              >
-                {showSensors ? <X className="w-4 h-4" /> : <ScanEye className="w-4 h-4" />}
-                {showSensors ? 'Back to the Shoe' : "See What's Inside"}
-              </button>
+              {stage === 'shoe' ? (
+                <button
+                  onClick={() => setStage('exploded')}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-teal-200 text-teal-700 rounded-full font-semibold shadow-sm hover:shadow-md hover:border-teal-300 hover:scale-105 transition-all"
+                >
+                  <ScanEye className="w-4 h-4" />
+                  See What's Inside
+                </button>
+              ) : (
+                <button
+                  onClick={() => setStage(stage === 'insole' ? 'exploded' : 'shoe')}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-teal-200 text-teal-700 rounded-full font-semibold shadow-sm hover:shadow-md hover:border-teal-300 hover:scale-105 transition-all"
+                >
+                  <X className="w-4 h-4" />
+                  {stage === 'insole' ? 'Back to Layers' : 'Back to the Shoe'}
+                </button>
+              )}
             </div>
           </motion.div>
         </div>

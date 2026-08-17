@@ -20,9 +20,18 @@ const SENSORS = [
   { id: 'heel', dot: [100 + OFFSET_X, 255 + OFFSET_Y], chip: [335, 275], side: 'right' as const, label: 'Heel Strike' },
 ];
 
+// Illustrated wireless pod that clips to the heel of the insole — a
+// stylized concept diagram, not a photo of any real manufactured part.
+const POD_CABLE = `M 200,265 C 218,275 232,278 248,281`;
+const POD_CENTER: [number, number] = [264, 286];
+
 export default function InsoleDiagram() {
   return (
     <div className="relative w-full" style={{ aspectRatio: `${VB_W} / ${VB_H}` }}>
+      <div className="absolute top-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 bg-gray-900 text-white rounded-full text-[10px] font-bold tracking-widest uppercase z-10">
+        NurvoSync Insole — Concept Diagram
+      </div>
+
       <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="absolute inset-0 w-full h-full">
         <motion.path
           d={FOOT_PATH}
@@ -35,6 +44,50 @@ export default function InsoleDiagram() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         />
+
+        <motion.text
+          x={185} y={175}
+          textAnchor="middle"
+          transform="rotate(-90 185 175)"
+          className="fill-teal-700/40"
+          style={{ fontSize: 15, fontWeight: 700, letterSpacing: 3 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+        >
+          NURVOSYNC
+        </motion.text>
+
+        {/* Wireless pod + connecting cable */}
+        <motion.path
+          d={POD_CABLE}
+          fill="none"
+          stroke="#334155"
+          strokeWidth="2"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
+        />
+        <motion.g
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.7, type: 'spring', stiffness: 260, damping: 18 }}
+          style={{ transformOrigin: `${POD_CENTER[0]}px ${POD_CENTER[1]}px` }}
+        >
+          <rect x={POD_CENTER[0] - 20} y={POD_CENTER[1] - 12} width="40" height="24" rx="8" fill="#0f172a" />
+          <circle cx={POD_CENTER[0]} cy={POD_CENTER[1]} r="4" className="fill-cyan-400 animate-pulse" />
+        </motion.g>
+        <motion.text
+          x={POD_CENTER[0]} y={POD_CENTER[1] + 26}
+          textAnchor="middle"
+          className="fill-gray-500"
+          style={{ fontSize: 10, fontWeight: 600 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.35, delay: 0.9 }}
+        >
+          Wireless Sensor Pod
+        </motion.text>
 
         {SENSORS.map((s, i) => (
           <motion.line
