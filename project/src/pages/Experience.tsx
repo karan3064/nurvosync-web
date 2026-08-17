@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Sparkles,
   Layers,
@@ -11,10 +11,13 @@ import {
   Footprints,
   ArrowRight,
   FileHeart,
+  ScanEye,
+  X,
 } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
 import ErrorBoundary from '../components/ErrorBoundary';
 import HeatmapCanvas from '../components/HeatmapCanvas';
+import InsoleDiagram from '../components/InsoleDiagram';
 import { staggerContainer, fadeUp, fadeUpSm, fadeInScale, revealViewport } from '../lib/motionVariants';
 
 const FEATURES = [
@@ -75,6 +78,16 @@ function useSimulatedGaitPressure() {
 
 export default function Experience() {
   const pressure = useSimulatedGaitPressure();
+  const [showSensors, setShowSensors] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const handleTiltMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: py * -12, y: px * 12 });
+  };
+  const handleTiltLeave = () => setTilt({ x: 0, y: 0 });
 
   return (
     <div className="min-h-screen bg-white pt-24 pb-12">
@@ -132,36 +145,84 @@ export default function Experience() {
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
           >
+            <div className="relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-gradient-to-tr from-teal-100 to-blue-100 rounded-full blur-3xl" />
-            <GlassCard className="relative p-2 rotate-[-3deg] hover:rotate-0 transition-transform duration-700 ease-out bg-white">
-              <img
-                src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?q=80&w=2079&auto=format&fit=crop"
-                alt="Smart insole embedded in orthopedic footwear"
-                className="rounded-2xl w-full object-cover shadow-xl border border-gray-100"
-              />
 
-              <div className="absolute -right-6 top-10 bg-white border border-teal-100 p-4 rounded-xl shadow-lg animate-float">
-                <div className="flex items-center gap-3">
-                  <Layers className="text-teal-500 w-5 h-5" />
-                  <div>
-                    <div className="text-[10px] text-gray-500 uppercase tracking-wider">Pressure Points</div>
-                    <div className="text-gray-900 font-mono font-bold">128</div>
-                  </div>
-                </div>
-              </div>
+            <motion.div
+              onMouseMove={handleTiltMove}
+              onMouseLeave={handleTiltLeave}
+              animate={{ rotateX: tilt.x, rotateY: tilt.y }}
+              transition={{ type: 'spring', stiffness: 150, damping: 15 }}
+              style={{ transformPerspective: 1000 }}
+              className="relative cursor-grab active:cursor-grabbing"
+            >
+              <GlassCard className="relative p-2 overflow-hidden">
+                <AnimatePresence mode="wait">
+                  {!showSensors ? (
+                    <motion.div
+                      key="photo"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?q=80&w=2079&auto=format&fit=crop"
+                        alt="Smart insole embedded in orthopedic footwear"
+                        className="rounded-2xl w-full object-cover shadow-xl border border-gray-100 pointer-events-none"
+                      />
 
-              <div className="absolute -left-6 bottom-10 bg-white border border-teal-100 p-4 rounded-xl shadow-lg animate-float delay-700">
-                <div className="flex items-center gap-3">
-                  <Activity className="text-blue-500 w-5 h-5" />
-                  <div>
-                    <div className="text-[10px] text-gray-500 uppercase tracking-wider">Sampling Rate</div>
-                    <div className="text-gray-900 font-mono font-bold">200 Hz</div>
-                  </div>
-                </div>
-              </div>
-            </GlassCard>
+                      <div className="absolute -right-6 top-10 bg-white border border-teal-100 p-4 rounded-xl shadow-lg animate-float">
+                        <div className="flex items-center gap-3">
+                          <Layers className="text-teal-500 w-5 h-5" />
+                          <div>
+                            <div className="text-[10px] text-gray-500 uppercase tracking-wider">Pressure Points</div>
+                            <div className="text-gray-900 font-mono font-bold">128</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="absolute -left-6 bottom-10 bg-white border border-teal-100 p-4 rounded-xl shadow-lg animate-float delay-700">
+                        <div className="flex items-center gap-3">
+                          <Activity className="text-blue-500 w-5 h-5" />
+                          <div>
+                            <div className="text-[10px] text-gray-500 uppercase tracking-wider">Sampling Rate</div>
+                            <div className="text-gray-900 font-mono font-bold">200 Hz</div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="diagram"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="p-6"
+                    >
+                      <InsoleDiagram />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </GlassCard>
+            </motion.div>
+            </div>
+
+            <p className="mt-3 text-center text-xs text-gray-400 font-medium tracking-wide">
+              Move your cursor over the shoe
+            </p>
+
+            <div className="mt-4 flex justify-center">
+              <button
+                onClick={() => setShowSensors((v) => !v)}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-teal-200 text-teal-700 rounded-full font-semibold shadow-sm hover:shadow-md hover:border-teal-300 hover:scale-105 transition-all"
+              >
+                {showSensors ? <X className="w-4 h-4" /> : <ScanEye className="w-4 h-4" />}
+                {showSensors ? 'Back to the Shoe' : "See What's Inside"}
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
