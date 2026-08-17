@@ -51,6 +51,10 @@ export default function Header() {
               Home
             </Link>
 
+            <Link to="/experience" className={navLinkClass('/experience')}>
+              Experience
+            </Link>
+
             <Link to="/demo" className={navLinkClass('/demo')}>
               Live Demo
             </Link>
@@ -103,6 +107,9 @@ export default function Header() {
           <div className="md:hidden mt-4 pb-2 border-t border-gray-100 pt-2">
             <Link to="/" className={mobileNavLinkClass('/')}>
               Home
+            </Link>
+            <Link to="/experience" className={mobileNavLinkClass('/experience')}>
+              Experience
             </Link>
             <Link to="/demo" className={mobileNavLinkClass('/demo')}>
               Live Demo

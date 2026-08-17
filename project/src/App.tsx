@@ -8,6 +8,7 @@ import ScrollToTop from './components/ScrollToTop';
 import AnimatedPage from './components/AnimatedPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import Home from './pages/Home';
+import Experience from './pages/Experience';
 import Demo from './pages/Demo';
 import Login from './pages/Login';
 import Partners from './pages/Partners';
@@ -21,6 +22,7 @@ function AppRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
+        <Route path="/experience" element={<AnimatedPage><Experience /></AnimatedPage>} />
         <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
         <Route
           path="/demo"

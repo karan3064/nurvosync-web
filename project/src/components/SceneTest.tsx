@@ -43,12 +43,31 @@ function RealShoe() {
     // Clone per-instance: the same SceneTest component is mounted twice
     // (left + right foot) and a THREE.Object3D can only live in one place
     // in the scene graph at a time, so the cached GLTF scene can't be reused as-is.
-    const clonedScene = useMemo(() => scene.clone(), [scene]);
+    //
+    // The source model's raw geometry is ~9.7 x 4 x 3.5 units, off-center from
+    // its own origin -- at any sane camera distance the camera ends up inside
+    // the mesh. Normalize it to a fixed size and center it at the origin so it
+    // frames correctly regardless of the file's native scale/pivot.
+    const clonedScene = useMemo(() => {
+        const clone = scene.clone();
+        const box = new THREE.Box3().setFromObject(clone);
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+
+        const maxDim = Math.max(size.x, size.y, size.z) || 1;
+        const targetSize = 2.4;
+        const scale = targetSize / maxDim;
+
+        clone.scale.setScalar(scale);
+        clone.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
+        return clone;
+    }, [scene]);
+
     return (
         <primitive
             object={clonedScene}
-            scale={1.4}
-            position={[0, -0.3, 0]}
             rotation={[0, Math.PI / 4, 0]}
         />
     );
@@ -140,7 +159,7 @@ export default function SceneTest({ pitch, roll }: Props) {
 
         <ShoeWrapper pitch={cleanPitch} roll={cleanRoll} />
 
-        <ContactShadows position={[0, -0.5, 0]} opacity={0.6} scale={10} blur={2} far={1} />
+        <ContactShadows position={[0, -0.5, 0]} opacity={0.6} scale={4} blur={2} far={1} />
         <OrbitControls enablePan={false} />
       </Canvas>
       

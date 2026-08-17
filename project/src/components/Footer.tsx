@@ -28,6 +28,11 @@ export default function Footer() {
             <h3 className="text-gray-900 font-semibold mb-3">Platform</h3>
             <ul className="space-y-2">
               <li>
+                <Link to="/experience" className="text-gray-500 text-sm hover:text-gray-900 transition-colors">
+                  Experience the Insole
+                </Link>
+              </li>
+              <li>
                 <Link to="/demo" className="text-gray-500 text-sm hover:text-gray-900 transition-colors">
                   Live Demo
                 </Link>
