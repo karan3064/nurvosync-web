@@ -81,3 +81,63 @@ create policy "Doctors can update own sessions"
 create policy "Doctors can delete own sessions"
   on public.gait_sessions for delete
   using (auth.uid() = doctor_id);
+
+-- 3. RAW SENSOR RECORDINGS (ML training data ingestion)
+-- Raw per-sample sensor streams (200Hz pressure/IMU) are gzip-compressed
+-- client-side and uploaded as files to the "raw-sessions" storage bucket,
+-- NOT stored as individual Postgres rows. This table only indexes them.
+
+insert into storage.buckets (id, name, public)
+values ('raw-sessions', 'raw-sessions', false)
+on conflict (id) do nothing;
+
+create policy "Doctors can upload own raw sessions"
+  on storage.objects for insert
+  with check (
+    bucket_id = 'raw-sessions'
+    and (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+create policy "Doctors can read own raw sessions"
+  on storage.objects for select
+  using (
+    bucket_id = 'raw-sessions'
+    and (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+create policy "Doctors can delete own raw sessions"
+  on storage.objects for delete
+  using (
+    bucket_id = 'raw-sessions'
+    and (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+create table if not exists public.raw_recordings (
+  id uuid primary key default gen_random_uuid(),
+  doctor_id uuid not null references auth.users(id) on delete cascade,
+  patient_id uuid references public.patients(id) on delete set null,
+  label text not null,
+  storage_path text not null,
+  sample_count integer not null,
+  duration_seconds numeric not null,
+  sampling_rate_hz numeric,
+  file_size_bytes integer,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists raw_recordings_doctor_id_idx on public.raw_recordings(doctor_id);
+create index if not exists raw_recordings_created_at_idx on public.raw_recordings(created_at desc);
+
+alter table public.raw_recordings enable row level security;
+
+create policy "Doctors can view own raw recordings"
+  on public.raw_recordings for select
+  using (auth.uid() = doctor_id);
+
+create policy "Doctors can insert own raw recordings"
+  on public.raw_recordings for insert
+  with check (auth.uid() = doctor_id);
+
+create policy "Doctors can delete own raw recordings"
+  on public.raw_recordings for delete
+  using (auth.uid() = doctor_id);

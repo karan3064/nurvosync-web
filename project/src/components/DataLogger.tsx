@@ -1,7 +1,9 @@
 // src/components/DataLogger.tsx
 
 import { useState, useRef, useEffect } from 'react';
-import { Play, Square, Trash2 } from 'lucide-react';
+import { Play, Square, Trash2, UploadCloud, CheckCircle2, XCircle } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { uploadRawRecording } from '../lib/rawRecordings';
 
 interface ImuReading {
   ax: number;
@@ -29,10 +31,14 @@ interface SensorRow {
   rightImu: ImuReading;
 }
 
+type UploadStatus = 'idle' | 'uploading' | 'success' | 'error';
+
 export default function DataLogger({ leftPressure, rightPressure, leftImu, rightImu }: DataLoggerProps) {
+  const { user } = useAuth();
   const [isRecording, setIsRecording] = useState(false);
   const [activityLabel, setActivityLabel] = useState('walking');
   const [frameCount, setFrameCount] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle');
 
   // React Ref for the buffer -- useState here would re-render on every
   // incoming sensor packet (~25Hz) and lag the UI.
@@ -57,6 +63,7 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
   }, [leftPressure, rightPressure, leftImu, rightImu, isRecording, activityLabel]);
 
   const handleStart = () => {
+    setUploadStatus('idle');
     setIsRecording(true);
   };
 
@@ -68,6 +75,8 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
         return;
     }
 
+    const buffer = dataBuffer.current;
+
     const headers = [
       "timestamp", "label",
       "left_fsr_0", "left_fsr_1", "left_fsr_2", "left_fsr_3", "left_fsr_4",
@@ -76,7 +85,7 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
       "right_ax", "right_ay", "right_az",
     ].join(",") + "\n";
 
-    const csvRows = dataBuffer.current.map(row => [
+    const csvRows = buffer.map(row => [
       row.timestamp, row.label,
       ...row.leftPressure, ...row.rightPressure,
       row.leftImu.ax, row.leftImu.ay, row.leftImu.az,
@@ -95,6 +104,19 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+
+    if (user) {
+      const durationSeconds = (buffer[buffer.length - 1].timestamp - buffer[0].timestamp) / 1000;
+      const samplingRateHz = durationSeconds > 0 ? buffer.length / durationSeconds : 0;
+
+      setUploadStatus('uploading');
+      uploadRawRecording(user.id, activityLabel, csvContent, buffer.length, durationSeconds, samplingRateHz)
+        .then(() => setUploadStatus('success'))
+        .catch((err) => {
+          console.error('Raw recording upload failed:', err);
+          setUploadStatus('error');
+        });
+    }
 
     dataBuffer.current = [];
     setFrameCount(0);
@@ -159,6 +181,26 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
         <span>Status: <span className={isRecording ? "text-red-600" : "text-gray-600"}>{isRecording ? "RECORDING" : "STANDBY"}</span></span>
         <span>Frames: {frameCount}</span>
       </div>
+
+      {uploadStatus !== 'idle' && (
+        <div className="mt-2 flex items-center gap-1.5 text-xs">
+          {uploadStatus === 'uploading' && (
+            <span className="flex items-center gap-1.5 text-gray-500">
+              <UploadCloud size={13} className="animate-pulse" /> Uploading to cloud…
+            </span>
+          )}
+          {uploadStatus === 'success' && (
+            <span className="flex items-center gap-1.5 text-green-600">
+              <CheckCircle2 size={13} /> Saved to cloud training set
+            </span>
+          )}
+          {uploadStatus === 'error' && (
+            <span className="flex items-center gap-1.5 text-red-600">
+              <XCircle size={13} /> Cloud upload failed (kept local CSV only)
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 }
