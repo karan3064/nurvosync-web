@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import AnimatedPage from './components/AnimatedPage';
+import ErrorBoundary from './components/ErrorBoundary';
 import Home from './pages/Home';
 import Demo from './pages/Demo';
 import Login from './pages/Login';
@@ -44,7 +45,9 @@ function App() {
         <div className="min-h-screen bg-white text-gray-900">
           <ScrollToTop />
           <Header />
-          <AppRoutes />
+          <ErrorBoundary>
+            <AppRoutes />
+          </ErrorBoundary>
           <Footer />
         </div>
       </Router>

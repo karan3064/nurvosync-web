@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, ContactShadows, Environment, useGLTF } from "@react-three/drei";
+import { OrbitControls, ContactShadows, useGLTF } from "@react-three/drei";
 import { useRef, useState, useMemo, Suspense } from "react";
 import * as THREE from "three";
 import { Crosshair } from "lucide-react";
@@ -133,9 +133,10 @@ export default function SceneTest({ pitch, roll }: Props) {
       </button>
 
       <Canvas camera={{ position: [3, 2, 3], fov: 50 }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <Environment preset="city" />
+        <ambientLight intensity={0.6} />
+        <pointLight position={[10, 10, 10]} intensity={1.2} />
+        <pointLight position={[-10, 5, -10]} intensity={0.4} />
+        <directionalLight position={[5, 8, 5]} intensity={0.8} />
 
         <ShoeWrapper pitch={cleanPitch} roll={cleanRoll} />
 

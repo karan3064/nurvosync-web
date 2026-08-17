@@ -11,6 +11,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 // --- IMPORTS (Assumed to exist in your project structure) ---
 import SceneTest from "../components/SceneTest";
+import ErrorBoundary from "../components/ErrorBoundary";
 import PressureMap from "../components/HeatmapCanvas";
 import AIAnalysis from "../components/AIAnalysis";
 import { connectBLE } from "../hooks/useBLE";
@@ -839,7 +840,7 @@ export default function App() {
                                 <span className="text-xs text-gray-500 uppercase font-bold">Steps <span className="text-gray-900 font-mono text-sm">{leftImu.steps}</span></span>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="h-40 bg-gray-50 rounded-xl overflow-hidden border border-gray-200 relative"><SceneTest pitch={leftOrient.pitch} roll={leftOrient.roll} side="left" /></div>
+                                <div className="h-40 bg-gray-50 rounded-xl overflow-hidden border border-gray-200 relative"><ErrorBoundary compact><SceneTest pitch={leftOrient.pitch} roll={leftOrient.roll} side="left" /></ErrorBoundary></div>
                                 <div className="h-40 bg-gray-50 rounded-xl p-2 border border-gray-200 flex items-center justify-center relative"><PressureMap pressure={leftPressure} side="left" sensorPos={SENSOR_POS} copPath={leftPath} /></div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
@@ -855,7 +856,7 @@ export default function App() {
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="h-40 bg-gray-50 rounded-xl p-2 border border-gray-200 flex items-center justify-center relative"><PressureMap pressure={rightPressure} side="right" sensorPos={SENSOR_POS} copPath={rightPath} /></div>
-                                <div className="h-40 bg-gray-50 rounded-xl overflow-hidden border border-gray-200 relative"><SceneTest pitch={rightOrient.pitch} roll={rightOrient.roll} side="right" /></div>
+                                <div className="h-40 bg-gray-50 rounded-xl overflow-hidden border border-gray-200 relative"><ErrorBoundary compact><SceneTest pitch={rightOrient.pitch} roll={rightOrient.roll} side="right" /></ErrorBoundary></div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <StanceSwingBar side="right" isStance={rightForceTotal > 0.1} />
