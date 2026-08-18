@@ -17,6 +17,7 @@ import {
 import GlassCard from '../components/GlassCard';
 import ErrorBoundary from '../components/ErrorBoundary';
 import HeatmapCanvas from '../components/HeatmapCanvas';
+import InsoleHotspots, { Hotspot } from '../components/InsoleHotspots';
 import { staggerContainer, fadeUp, fadeUpSm, fadeInScale, revealViewport } from '../lib/motionVariants';
 
 type ShoeStage = 'shoe' | 'exploded' | 'insole';
@@ -52,6 +53,17 @@ const FEATURES = [
     title: 'Fits Any Orthopedic Footwear',
     description: 'Ultra-thin by design, so it slots into the shoe a patient already wears — nothing to relearn.',
   },
+];
+
+// Hotspot positions are hand-placed percentages matching the physical
+// layout in /images/insole-pod.png (left insole toe/arch/heel, its pod,
+// and the right insole toe).
+const INSOLE_HOTSPOTS: Hotspot[] = [
+  { id: 'pressure', x: 34.5, y: 13, icon: Layers, title: '128-Point Pressure Sensors', description: 'A dense capacitive array captures the full plantar pressure picture, not just a few sample points.' },
+  { id: 'imu', x: 34.5, y: 45, icon: Activity, title: '6-Axis IMU', description: 'Accelerometer and gyroscope fused together to track pitch, roll, and step kinematics in real time.' },
+  { id: 'material', x: 32, y: 71, icon: ShieldCheck, title: 'Antimicrobial & Hypoallergenic', description: 'A surface designed for everyday skin contact, worn inside a shoe for hours at a time.' },
+  { id: 'pod', x: 6.5, y: 64, icon: Bluetooth, title: 'Wireless Streaming Pod', description: 'Clips onto the insole and streams data to the patient app over Bluetooth — no cables, no docking.' },
+  { id: 'sampling', x: 66, y: 13, icon: Database, title: '200 Hz Sampling Rate', description: 'Fast enough to catch the fine-grained detail of a heel strike or a moment of instability.' },
 ];
 
 // Illustrative walking-cycle pressure animation for the preview below —
@@ -234,16 +246,12 @@ export default function Experience() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="relative"
                     >
-                      <img
+                      <InsoleHotspots
                         src="/images/insole-pod.png"
                         alt="NurvoSync insole pair with wireless sensor pods"
-                        className="rounded-2xl w-full object-cover pointer-events-none"
+                        hotspots={INSOLE_HOTSPOTS}
                       />
-                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white/95 backdrop-blur border border-gray-200 rounded-full shadow-md text-xs font-semibold text-gray-700 whitespace-nowrap">
-                        NurvoSync Insole + Wireless Sensor Pod
-                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -251,11 +259,12 @@ export default function Experience() {
             </motion.div>
             </div>
 
-            <p className="mt-3 text-center text-xs text-gray-400 font-medium tracking-wide">
-              {stage === 'shoe' && 'Move your cursor over the shoe'}
-              {stage === 'exploded' && 'Tap the insole to see the real hardware'}
-              {stage === 'insole' && 'The actual NurvoSync insole and wireless pod'}
-            </p>
+            {stage !== 'insole' && (
+              <p className="mt-3 text-center text-xs text-gray-400 font-medium tracking-wide">
+                {stage === 'shoe' && 'Move your cursor over the shoe'}
+                {stage === 'exploded' && 'Tap the insole to see the real hardware'}
+              </p>
+            )}
 
             <div className="mt-4 flex justify-center">
               {stage === 'shoe' ? (
