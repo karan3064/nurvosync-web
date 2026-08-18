@@ -8,7 +8,7 @@
       "dest": "/assets/$1"
     },
     {
-      "src": "^/(models/.*|favicon\\.svg|Shoe\\.glb|vite\\.svg)",
+      "src": "^/(.*\\.(?:png|jpg|jpeg|gif|webp|svg|glb|ico|mp4|pdf|xlsx))$",
       "dest": "/$1"
     },
     {
