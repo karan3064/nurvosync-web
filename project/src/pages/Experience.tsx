@@ -17,8 +17,6 @@ import {
 import GlassCard from '../components/GlassCard';
 import ErrorBoundary from '../components/ErrorBoundary';
 import HeatmapCanvas from '../components/HeatmapCanvas';
-import InsoleDiagram from '../components/InsoleDiagram';
-import ShoeLayers from '../components/ShoeLayers';
 import { staggerContainer, fadeUp, fadeUpSm, fadeInScale, revealViewport } from '../lib/motionVariants';
 
 type ShoeStage = 'shoe' | 'exploded' | 'insole';
@@ -204,21 +202,48 @@ export default function Experience() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="aspect-square"
+                      className="relative"
                     >
-                      <ShoeLayers onSelectInsole={() => setStage('insole')} />
+                      <img
+                        src="/images/shoe-exploded.png"
+                        alt="Exploded view: shoe upper, NurvoSync insole, and outsole"
+                        className="rounded-2xl w-full object-cover pointer-events-none"
+                      />
+
+                      <motion.button
+                        onClick={() => setStage('insole')}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: 0.4 }}
+                        whileHover={{ scale: 1.05 }}
+                        className="absolute flex items-center gap-2 px-4 py-2 bg-white border-2 border-teal-400 rounded-full shadow-lg text-sm font-bold text-teal-700"
+                        style={{ left: '66%', top: '47%' }}
+                      >
+                        <span className="relative flex h-2.5 w-2.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500" />
+                        </span>
+                        NurvoSync Insole
+                      </motion.button>
                     </motion.div>
                   )}
                   {stage === 'insole' && (
                     <motion.div
-                      key="diagram"
+                      key="product"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="p-6"
+                      className="relative"
                     >
-                      <InsoleDiagram />
+                      <img
+                        src="/images/insole-pod.png"
+                        alt="NurvoSync insole pair with wireless sensor pods"
+                        className="rounded-2xl w-full object-cover pointer-events-none"
+                      />
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white/95 backdrop-blur border border-gray-200 rounded-full shadow-md text-xs font-semibold text-gray-700 whitespace-nowrap">
+                        NurvoSync Insole + Wireless Sensor Pod
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -228,8 +253,8 @@ export default function Experience() {
 
             <p className="mt-3 text-center text-xs text-gray-400 font-medium tracking-wide">
               {stage === 'shoe' && 'Move your cursor over the shoe'}
-              {stage === 'exploded' && 'Tap the insole layer to explore its sensors'}
-              {stage === 'insole' && 'Drag the card to look around'}
+              {stage === 'exploded' && 'Tap the insole to see the real hardware'}
+              {stage === 'insole' && 'The actual NurvoSync insole and wireless pod'}
             </p>
 
             <div className="mt-4 flex justify-center">
