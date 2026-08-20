@@ -20,6 +20,7 @@ interface DataLoggerProps {
   rightPressure: number[];
   leftImu: ImuReading;
   rightImu: ImuReading;
+  onUploaded?: () => void;
 }
 
 interface SensorRow {
@@ -33,7 +34,7 @@ interface SensorRow {
 
 type UploadStatus = 'idle' | 'uploading' | 'success' | 'error';
 
-export default function DataLogger({ leftPressure, rightPressure, leftImu, rightImu }: DataLoggerProps) {
+export default function DataLogger({ leftPressure, rightPressure, leftImu, rightImu, onUploaded }: DataLoggerProps) {
   const { user } = useAuth();
   const [isRecording, setIsRecording] = useState(false);
   const [activityLabel, setActivityLabel] = useState('walking');
@@ -111,7 +112,10 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
 
       setUploadStatus('uploading');
       uploadRawRecording(user.id, activityLabel, csvContent, buffer.length, durationSeconds, samplingRateHz)
-        .then(() => setUploadStatus('success'))
+        .then(() => {
+          setUploadStatus('success');
+          onUploaded?.();
+        })
         .catch((err) => {
           console.error('Raw recording upload failed:', err);
           setUploadStatus('error');

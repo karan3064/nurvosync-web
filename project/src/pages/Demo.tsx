@@ -21,6 +21,7 @@ import StanceSwingBar from "../components/StanceSwingBar";
 import SwayTarget from "../components/SwayTarget";
 import FootStrikeGauge from "../components/FootStrikeGauge";
 import DataLogger from "../components/DataLogger";
+import RecordingsList from "../components/RecordingsList";
 import MedicalReport from '../components/MedicalReport';
 import { useAuth } from "../contexts/AuthContext";
 import { listPatients, addPatient } from "../lib/patients";
@@ -514,6 +515,7 @@ export default function App() {
   const [reportData, setReportData] = useState<WalkReport | null>(null);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [showRawData, setShowRawData] = useState(false);
+  const [recordingsRefresh, setRecordingsRefresh] = useState(0);
   const [liveRisk, setLiveRisk] = useState<{ level: WalkReport["riskLevel"]; score: number } | null>(null);
   const [liveMetrics, setLiveMetrics] = useState<{ gaitSpeed: number; doubleSupportPercent: number; cadence: number; symmetry: number } | null>(null);
   const [signalRate, setSignalRate] = useState({ left: 0, right: 0 });
@@ -874,13 +876,18 @@ export default function App() {
                     <ChevronDown className={`text-gray-500 transition-transform ${showRawData ? 'rotate-180' : ''}`} size={16} />
                 </button>
                 {showRawData && (
-                    <div className="px-6 pb-6">
+                    <div className="px-6 pb-6 space-y-4">
                         <DataLogger
                             leftPressure={leftPressure}
                             rightPressure={rightPressure}
                             leftImu={leftImu}
                             rightImu={rightImu}
+                            onUploaded={() => setRecordingsRefresh((n) => n + 1)}
                         />
+                        <div>
+                            <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Recordings Saved to the Cloud</h4>
+                            <RecordingsList refreshKey={recordingsRefresh} />
+                        </div>
                     </div>
                 )}
             </GlassCard>
