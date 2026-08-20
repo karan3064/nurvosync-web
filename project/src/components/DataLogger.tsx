@@ -40,6 +40,7 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
   const [activityLabel, setActivityLabel] = useState('walking');
   const [frameCount, setFrameCount] = useState(0);
   const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle');
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   // React Ref for the buffer -- useState here would re-render on every
   // incoming sensor packet (~25Hz) and lag the UI.
@@ -111,6 +112,7 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
       const samplingRateHz = durationSeconds > 0 ? buffer.length / durationSeconds : 0;
 
       setUploadStatus('uploading');
+      setUploadError(null);
       uploadRawRecording(user.id, activityLabel, csvContent, buffer.length, durationSeconds, samplingRateHz)
         .then(() => {
           setUploadStatus('success');
@@ -118,6 +120,7 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
         })
         .catch((err) => {
           console.error('Raw recording upload failed:', err);
+          setUploadError(err?.message ?? String(err));
           setUploadStatus('error');
         });
     }
@@ -199,8 +202,12 @@ export default function DataLogger({ leftPressure, rightPressure, leftImu, right
             </span>
           )}
           {uploadStatus === 'error' && (
-            <span className="flex items-center gap-1.5 text-red-600">
-              <XCircle size={13} /> Cloud upload failed (kept local CSV only)
+            <span className="flex items-start gap-1.5 text-red-600">
+              <XCircle size={13} className="mt-0.5 flex-shrink-0" />
+              <span>
+                Cloud upload failed (kept local CSV only)
+                {uploadError && <span className="block text-gray-500 font-mono text-[10px] mt-0.5 break-all">{uploadError}</span>}
+              </span>
             </span>
           )}
         </div>

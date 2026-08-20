@@ -28,8 +28,8 @@ export default function RecordingsList({ refreshKey }: { refreshKey: number }) {
     setError(null);
     try {
       setRecordings(await listRawRecordings(user.id));
-    } catch {
-      setError('Could not load recordings.');
+    } catch (err: any) {
+      setError(err?.message ?? 'Could not load recordings.');
     } finally {
       setLoading(false);
     }
