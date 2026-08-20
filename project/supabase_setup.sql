@@ -91,6 +91,9 @@ insert into storage.buckets (id, name, public)
 values ('raw-sessions', 'raw-sessions', false)
 on conflict (id) do nothing;
 
+-- create policy has no IF NOT EXISTS in Postgres, so drop-then-create
+-- keeps this script safe to re-run after a partial failure.
+drop policy if exists "Doctors can upload own raw sessions" on storage.objects;
 create policy "Doctors can upload own raw sessions"
   on storage.objects for insert
   with check (
@@ -98,6 +101,7 @@ create policy "Doctors can upload own raw sessions"
     and (storage.foldername(name))[1] = auth.uid()::text
   );
 
+drop policy if exists "Doctors can read own raw sessions" on storage.objects;
 create policy "Doctors can read own raw sessions"
   on storage.objects for select
   using (
@@ -105,6 +109,7 @@ create policy "Doctors can read own raw sessions"
     and (storage.foldername(name))[1] = auth.uid()::text
   );
 
+drop policy if exists "Doctors can delete own raw sessions" on storage.objects;
 create policy "Doctors can delete own raw sessions"
   on storage.objects for delete
   using (
@@ -130,14 +135,17 @@ create index if not exists raw_recordings_created_at_idx on public.raw_recording
 
 alter table public.raw_recordings enable row level security;
 
+drop policy if exists "Doctors can view own raw recordings" on public.raw_recordings;
 create policy "Doctors can view own raw recordings"
   on public.raw_recordings for select
   using (auth.uid() = doctor_id);
 
+drop policy if exists "Doctors can insert own raw recordings" on public.raw_recordings;
 create policy "Doctors can insert own raw recordings"
   on public.raw_recordings for insert
   with check (auth.uid() = doctor_id);
 
+drop policy if exists "Doctors can delete own raw recordings" on public.raw_recordings;
 create policy "Doctors can delete own raw recordings"
   on public.raw_recordings for delete
   using (auth.uid() = doctor_id);
