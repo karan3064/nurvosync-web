@@ -501,6 +501,8 @@ export default function App() {
   // STATE: Live Demo Logic
   const [leftConnected, setLeftConnected] = useState(false);
   const [rightConnected, setRightConnected] = useState(false);
+  const [leftDropped, setLeftDropped] = useState(false);
+  const [rightDropped, setRightDropped] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
   const [leftImu, setLeftImu] = useState({ ax: 0, ay: 0, az: 1, steps: 0, cad: 0 });
   const [leftPressure, setLeftPressure] = useState<number[]>([0, 0, 0, 0, 0]);
@@ -639,6 +641,7 @@ export default function App() {
   const handleConnect = async (side: "left" | "right") => {
       if (isConnecting) return;
       setIsConnecting(true);
+      if (side === "left") setLeftDropped(false); else setRightDropped(false);
       const deviceName = side === "left" ? "NurvoSync-Left" : "NurvoSync-Right";
       try {
         await connectBLE(deviceName, (data) => {
@@ -687,8 +690,11 @@ export default function App() {
 
   }
 
+}, () => {
+  if (side === "left") { setLeftConnected(false); setLeftDropped(true); }
+  else { setRightConnected(false); setRightDropped(true); }
 });
-      } catch(e: any) { alert(`Connection Failed: ${e.message}`); } 
+      } catch(e: any) { alert(`Connection Failed: ${e.message}`); }
       finally { setIsConnecting(false); }
   };
 
@@ -708,11 +714,11 @@ export default function App() {
             {view === 'live' && (
               <div className="flex gap-3">
                  <button onClick={() => setView('patient')} className="mr-4 text-sm text-gray-600 hover:text-gray-900">Exit Session</button>
-                  {[{side: 'left', active: leftConnected, hz: signalRate.left}, {side: 'right', active: rightConnected, hz: signalRate.right}].map((dev: any) => (
+                  {[{side: 'left', active: leftConnected, dropped: leftDropped, hz: signalRate.left}, {side: 'right', active: rightConnected, dropped: rightDropped, hz: signalRate.right}].map((dev: any) => (
                       <button key={dev.side} onClick={() => handleConnect(dev.side)} disabled={dev.active || isConnecting}
-                        className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border transition-all flex items-center gap-2 ${dev.active ? 'bg-blue-50 border-blue-300 text-blue-700' : 'border-gray-300 hover:bg-gray-50 text-gray-600'}`}>
-                          {isConnecting && !dev.active ? <Loader2 className="animate-spin" size={14}/> : dev.active ? <Activity size={14}/> : <Bluetooth size={14}/>}
-                          {dev.side} {dev.active ? `${dev.hz}Hz` : 'Connect'}
+                        className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border transition-all flex items-center gap-2 ${dev.active ? 'bg-blue-50 border-blue-300 text-blue-700' : dev.dropped ? 'bg-red-50 border-red-300 text-red-600 animate-pulse' : 'border-gray-300 hover:bg-gray-50 text-gray-600'}`}>
+                          {isConnecting && !dev.active ? <Loader2 className="animate-spin" size={14}/> : dev.active ? <Activity size={14}/> : dev.dropped ? <AlertTriangle size={14}/> : <Bluetooth size={14}/>}
+                          {dev.side} {dev.active ? `${dev.hz}Hz` : dev.dropped ? 'Reconnect' : 'Connect'}
                       </button>
                   ))}
               </div>

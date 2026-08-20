@@ -5,7 +5,8 @@ const CHAR_UUID = "abcdefab-1234-5678-1234-abcdefabcdef";
 
 export async function connectBLE(
   namePrefix: string,
-  onData: (data: any) => void
+  onData: (data: any) => void,
+  onDisconnect?: () => void
 ) {
   if (!navigator.bluetooth) {
     alert("Web Bluetooth not supported");
@@ -87,6 +88,7 @@ export async function connectBLE(
     // ===== DISCONNECT HANDLER =====
     device.addEventListener("gattserverdisconnected", () => {
       console.warn("⚠️ Device disconnected");
+      onDisconnect?.();
     });
 
   } catch (error: any) {
