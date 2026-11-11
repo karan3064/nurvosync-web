@@ -168,7 +168,7 @@ export default function Home() {
             className="grid grid-cols-2 gap-6"
           >
             <FigureImage
-              src="/images/prototype-gen1.jpg"
+              src="/images/prototype-gen1.png"
               alt="NurvoSync hardware, generation 1 prototype: circuit-trace pressure sensor array"
               caption="FIG. 02 — GEN 1"
               aspect="aspect-[3/4]"
