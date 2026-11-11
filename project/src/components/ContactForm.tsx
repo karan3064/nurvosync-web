@@ -1,8 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
-// TODO: paste the access key from web3forms.com here once you have it.
-const WEB3FORMS_ACCESS_KEY = '';
+const WEB3FORMS_ACCESS_KEY = 'b57e493a-7b85-4591-9946-0c5d8ffa2308';
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error' | 'not-configured';
