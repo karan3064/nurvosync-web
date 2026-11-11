@@ -30,3 +30,15 @@ export const fadeInScale: Variants = {
 
 // Default viewport trigger settings shared across scroll reveals.
 export const revealViewport = { once: true, margin: '-80px' } as const;
+
+// Editorial design system (Home, Header, Footer): subtle fade only, no
+// travel distance or bounce, per the "hardware lab" visual language.
+export const editorialFade: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.2 } },
+};
+
+export const editorialFadeUp: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.2 } },
+};

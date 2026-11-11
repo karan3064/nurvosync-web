@@ -4,6 +4,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
 import AnimatedPage from './components/AnimatedPage';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -44,13 +45,14 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-white text-gray-900">
+        <div className="min-h-screen bg-paper text-ink">
           <ScrollToTop />
           <Header />
           <ErrorBoundary>
             <AppRoutes />
           </ErrorBoundary>
           <Footer />
+          <WhatsAppButton />
         </div>
       </Router>
     </AuthProvider>
