@@ -104,7 +104,7 @@ export default function Home() {
             animate="show"
           >
             <FigureImage
-              src="/images/insole-hero.jpg"
+              src="/images/insole-pod.png"
               alt="NurvoSync smart insole pair with ankle pods"
               caption="FIG. 01 — NURVOSYNC INSOLE + ANKLE POD, GEN 3"
               aspect="aspect-[4/3]"
