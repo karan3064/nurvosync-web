@@ -208,10 +208,10 @@ export default function Home() {
             </p>
 
             <FigureImage
-              src="/images/app-heatmap.png"
+              src="/images/app-heatmap.jpg"
               alt="NurvoSync app showing a live plantar pressure heat-map"
               caption="FIG. 05 — COMPANION APP, PRESSURE HEAT-MAP"
-              aspect="aspect-[16/10]"
+              aspect="aspect-[3/4]"
             />
           </motion.div>
         </div>
