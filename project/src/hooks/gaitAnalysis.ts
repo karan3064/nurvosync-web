@@ -34,6 +34,7 @@ export function analyzeWalk(frames: GaitFrame[]): WalkReport {
   let swingFrames = 0
 
   let stepFrames:number[] = []
+  let wasAboveThreshold = false
 
   frames.forEach((f, index) => {
 
@@ -51,12 +52,21 @@ export function analyzeWalk(frames: GaitFrame[]): WalkReport {
       swingFrames++
     }
 
-    /* -------- STEP DETECTION -------- */
+    /* -------- STEP DETECTION --------
+       Count the rising edge (below -> above threshold) once per foot
+       strike, not every frame the foot stays down -- frames are
+       captured many times per second, so counting every frame above
+       threshold multiplies each real step by however many frames its
+       stance phase spans (steps in the hundreds for a normal walk). */
 
-    if(left > 0.25 || right > 0.25) {
+    const isAboveThreshold = left > 0.25 || right > 0.25
+
+    if(isAboveThreshold && !wasAboveThreshold) {
       steps++
       stepFrames.push(index)
     }
+
+    wasAboveThreshold = isAboveThreshold
 
   })
 
