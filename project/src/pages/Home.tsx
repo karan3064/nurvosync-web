@@ -165,26 +165,25 @@ export default function Home() {
             initial="hidden"
             whileInView="show"
             viewport={revealViewport}
-            className="grid grid-cols-2 gap-6"
+            className="space-y-6"
           >
             <FigureImage
-              src="/images/prototype-gen1.png"
-              alt="NurvoSync hardware, generation 1 prototype: circuit-trace pressure sensor array"
+              src="/images/prototype-gen1.jpg"
+              alt="NurvoSync hardware, generation 1 prototype: bare FSR pressure sensors wired to a 3D-printed sole"
               caption="FIG. 02 — GEN 1"
+              aspect="aspect-[5/3]"
+            />
+            <FigureImage
+              src="/images/prototype-gen2.png"
+              alt="NurvoSync hardware, generation 2 prototype: circuit-trace pressure sensor array"
+              caption="FIG. 03 — GEN 2"
               aspect="aspect-[3/4]"
             />
             <FigureImage
-              src="/images/prototype-gen2.jpg"
-              alt="NurvoSync hardware, generation 2 prototype"
-              caption="FIG. 03 — GEN 2"
-              aspect="aspect-square"
-            />
-            <FigureImage
-              src="/images/insole-hero.jpg"
-              alt="NurvoSync hardware, generation 3"
+              src="/images/insole-pod.png"
+              alt="NurvoSync hardware, generation 3: molded insole with wireless sensor pod"
               caption="FIG. 04 — GEN 3"
-              aspect="aspect-square"
-              className="col-span-2"
+              aspect="aspect-[4/3]"
             />
           </motion.div>
 
