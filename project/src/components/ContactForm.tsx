@@ -1,8 +1,9 @@
 import { useState, FormEvent } from 'react';
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
-// TODO: set this to a real Formspree or Web3Forms endpoint before launch.
-const FORM_ENDPOINT = '';
+// TODO: paste the access key from web3forms.com here once you have it.
+const WEB3FORMS_ACCESS_KEY = '';
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error' | 'not-configured';
 
@@ -12,7 +13,7 @@ export default function ContactForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!FORM_ENDPOINT) {
+    if (!WEB3FORMS_ACCESS_KEY) {
       setStatus('not-configured');
       return;
     }
@@ -20,13 +21,16 @@ export default function ContactForm() {
     setStatus('sending');
     const form = e.currentTarget;
     const formData = new FormData(form);
+    formData.append('access_key', WEB3FORMS_ACCESS_KEY);
+    formData.append('subject', 'New pilot request — NurvoSync website');
     try {
-      const res = await fetch(FORM_ENDPOINT, {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
       });
-      if (res.ok) {
+      const data = await res.json();
+      if (res.ok && data.success) {
         setStatus('sent');
         form.reset();
       } else {
