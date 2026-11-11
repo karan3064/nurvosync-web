@@ -96,7 +96,7 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-paper/15 space-y-2">
           <p className="text-paper/50 text-xs">
-            NurvoSync is a product of NurvoExa Systems Private Limited · CIN U26100UW2026PTC257766 · DPIIT No. DIPP286151
+            NurvoSync is a product of NurvoExa Systems Private Limited
           </p>
           <p className="text-paper/50 text-xs">
             Registered office: Noida, Uttar Pradesh

@@ -42,8 +42,8 @@ const HOW_IT_WORKS = [
 ];
 
 const GRANTS = [
-  { year: '2026', title: 'NCPEDP–Mphasis AT Hub Seed Grant', detail: '₹5 L (2026 cohort)' },
-  { year: '2026', title: 'E-Pitch Café, IIIT-Delhi (STMicroelectronics / CiPD)', detail: '₹1 L' },
+  { year: '2026', title: 'NCPEDP–Mphasis AT Hub Seed Grant', detail: '2026 cohort' },
+  { year: '2026', title: 'E-Pitch Café, IIIT-Delhi (STMicroelectronics / CiPD)', detail: '' },
   { year: '2026', title: 'Delhi Startup Yuva', detail: 'Top 100' },
   { year: '2026', title: 'STPI Electropreneur Park', detail: 'OCP 2.0 & 8.0' },
   { year: '2026', title: 'Young Startup Innovators Award', detail: 'IIIT-Delhi IIC' },
@@ -54,7 +54,6 @@ const ADVISORS = [
   'Dr. Alok Nikhil Jha — Faculty advisor, IIIT-Delhi',
   'Manish Verma — Business advisor',
   'Dr. Saranjeet Singh — Clinical lead',
-  'Dr. Naveen Chawla — Clinical partner, MBBS, DNB Internal Medicine',
 ];
 
 export default function Home() {
@@ -293,10 +292,12 @@ export default function Home() {
             </div>
 
             <div className="border-t border-paper/20 pt-6">
-              <h3 className="text-lg font-serif font-medium mb-3">Clinical study interest</h3>
+              <h3 className="text-lg font-serif font-medium mb-3">Scientific basis</h3>
               <p className="text-paper/70 text-sm leading-relaxed">
-                GMC Haldwani / Metro Hospital Haridwar — a 30–40 participant study,
-                LOI in progress.
+                Our IEEE APSCON 2026 paper establishes the scientific basis for
+                plantar-pressure-based gait monitoring, grounding the insole's
+                sensing approach in peer-reviewed research rather than an
+                unvalidated assumption.
               </p>
             </div>
           </motion.div>
