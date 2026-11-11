@@ -20,13 +20,14 @@ export default function ContactForm() {
     setStatus('sending');
     const form = e.currentTarget;
     const formData = new FormData(form);
-    formData.append('access_key', WEB3FORMS_ACCESS_KEY);
-    formData.append('subject', 'New pilot request — NurvoSync website');
+    const payload: Record<string, string> = Object.fromEntries(formData.entries()) as Record<string, string>;
+    payload.access_key = WEB3FORMS_ACCESS_KEY;
+    payload.subject = 'New pilot request — NurvoSync website';
     try {
       const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
-        body: formData,
-        headers: { Accept: 'application/json' },
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       });
       const data = await res.json();
       if (res.ok && data.success) {
