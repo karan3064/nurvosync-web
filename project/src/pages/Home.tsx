@@ -169,9 +169,9 @@ export default function Home() {
           >
             <FigureImage
               src="/images/prototype-gen1.jpg"
-              alt="NurvoSync hardware, generation 1 prototype"
+              alt="NurvoSync hardware, generation 1 prototype: circuit-trace pressure sensor array"
               caption="FIG. 02 — GEN 1"
-              aspect="aspect-square"
+              aspect="aspect-[3/4]"
             />
             <FigureImage
               src="/images/prototype-gen2.jpg"
