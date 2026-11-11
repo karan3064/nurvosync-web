@@ -357,7 +357,7 @@ export default function Home() {
             <div className="group">
               <div className="overflow-hidden mb-4">
                 <FigureImage
-                  src="/images/team-karan.jpg"
+                  src="/images/team-karan.png"
                   alt="Karanjeet Singh, co-founder of NurvoSync"
                   caption=""
                   aspect="aspect-[4/5]"
@@ -381,7 +381,7 @@ export default function Home() {
             <div className="group">
               <div className="overflow-hidden mb-4">
                 <FigureImage
-                  src="/images/team-yash.jpg"
+                  src="/images/team-yash.png"
                   alt="Yash Agarwal, co-founder of NurvoSync"
                   caption=""
                   aspect="aspect-[4/5]"
