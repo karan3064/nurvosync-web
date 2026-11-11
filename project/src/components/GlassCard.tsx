@@ -10,8 +10,8 @@ export default function GlassCard({ children, className = '', hover = false }: G
   return (
     <div
       className={`
-        bg-white rounded-2xl border border-gray-200 shadow-sm
-        ${hover ? 'transition-all duration-300 hover:shadow-md hover:border-gray-300 hover:scale-[1.02]' : ''}
+        bg-surface rounded border border-hairline
+        ${hover ? 'transition-colors duration-200 hover:border-ink' : ''}
         ${className}
       `}
     >

@@ -58,9 +58,9 @@ const AdvancedAIAnalysis = ({ session }: { session: GaitSession | null }) => {
 
       {/* DIGITAL BIOMARKERS GRID (from the most recent recorded session) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <GlassCard className="p-4 bg-blue-50 border-blue-200 relative group">
-            <div className="absolute top-2 right-2 text-blue-500 opacity-50"><Activity size={12}/></div>
-            <div className="text-[10px] uppercase text-blue-600 font-bold mb-1">Gait Asymmetry</div>
+        <GlassCard className="p-4 relative group">
+            <div className="absolute top-2 right-2 text-signal opacity-50"><Activity size={12}/></div>
+            <div className="text-[10px] uppercase text-signal font-bold mb-1">Gait Asymmetry</div>
             <div className="text-2xl font-bold text-gray-900">{aiData.biomarkers.asymmetry}</div>
             <div className="text-xs text-red-600 mt-1">
                {session.asymmetry_index > 8 ? "⚠️ Abnormal" : "Within Limits"}
@@ -87,11 +87,11 @@ const AdvancedAIAnalysis = ({ session }: { session: GaitSession | null }) => {
       </div>
 
       {/* CLINICAL NARRATIVE — rule-based decision support, not a trained model */}
-      <GlassCard className="p-1 relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
-          <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+      <GlassCard className="p-1 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-1 h-full bg-signal"></div>
           <div className="p-6">
             <div className="flex items-start gap-5">
-                <div className="bg-blue-100 p-3 rounded-xl text-blue-600 border border-blue-200">
+                <div className="bg-paper p-3 text-signal border border-hairline">
                   <BrainCircuit size={28} />
                 </div>
                 <div className="flex-1">
@@ -117,7 +117,7 @@ const AdvancedAIAnalysis = ({ session }: { session: GaitSession | null }) => {
                         </div>
                      </div>
                      <div className="bg-white p-3 rounded border border-gray-200 flex gap-3 items-center">
-                         <div className="p-2 rounded bg-blue-100 text-blue-600"><ClipboardCheck size={16}/></div>
+                         <div className="p-2 rounded bg-paper text-signal"><ClipboardCheck size={16}/></div>
                          <div>
                             <div className="text-[10px] text-gray-500 uppercase font-bold">Recommended Therapy</div>
                             <div className="text-gray-900 text-xs font-medium">{aiData.recommendation}</div>
@@ -199,9 +199,9 @@ const DoctorDashboard = ({ onSelectPatient }: { onSelectPatient: (p: PatientWith
           </p>
         </div>
         <div className="flex gap-3 items-center">
-           <button onClick={() => setShowAddPatient(true)} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 transition rounded-lg text-sm text-white font-medium flex items-center gap-2"><Plus size={16}/> Add Patient</button>
-           <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center font-bold text-white shadow-lg">{(user?.email?.[0] ?? 'D').toUpperCase()}</div>
-           <button onClick={handleSignOut} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 transition rounded-lg text-sm text-gray-700 font-medium flex items-center gap-2"><LogOut size={16}/> Sign Out</button>
+           <button onClick={() => setShowAddPatient(true)} className="px-4 py-2 bg-ink hover:bg-signal transition-colors text-sm text-paper font-medium flex items-center gap-2"><Plus size={16}/> Add Patient</button>
+           <div className="w-10 h-10 bg-ink rounded-full flex items-center justify-center font-bold text-paper">{(user?.email?.[0] ?? 'D').toUpperCase()}</div>
+           <button onClick={handleSignOut} className="px-4 py-2 bg-paper border border-hairline hover:border-ink transition-colors text-sm text-ink font-medium flex items-center gap-2"><LogOut size={16}/> Sign Out</button>
         </div>
       </div>
 
@@ -234,7 +234,7 @@ const DoctorDashboard = ({ onSelectPatient }: { onSelectPatient: (p: PatientWith
 
       {/* Patient List */}
       <GlassCard className="p-6">
-        <div className="flex items-center gap-2 mb-6 text-blue-600 uppercase text-xs font-bold tracking-widest">
+        <div className="flex items-center gap-2 mb-6 text-signal uppercase text-xs font-bold tracking-widest">
            <User size={14} /> Active Patient Roster
         </div>
 
@@ -245,7 +245,7 @@ const DoctorDashboard = ({ onSelectPatient }: { onSelectPatient: (p: PatientWith
         ) : patients.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
             <p className="text-gray-500">No patients yet — add your first patient to begin tracking gait sessions.</p>
-            <button onClick={() => setShowAddPatient(true)} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 transition rounded-lg text-sm text-white font-medium flex items-center gap-2"><Plus size={16}/> Add Patient</button>
+            <button onClick={() => setShowAddPatient(true)} className="px-4 py-2 bg-ink hover:bg-signal transition-colors text-sm text-paper font-medium flex items-center gap-2"><Plus size={16}/> Add Patient</button>
           </div>
         ) : (
         <table className="w-full text-left border-collapse">
@@ -305,21 +305,21 @@ const DoctorDashboard = ({ onSelectPatient }: { onSelectPatient: (p: PatientWith
               <div>
                 <label className="block text-xs text-gray-600 mb-1">Name</label>
                 <input required value={newPatient.name} onChange={e => setNewPatient(p => ({ ...p, name: e.target.value }))}
-                  className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+                  className="w-full bg-surface border border-hairline px-3 py-2 text-ink text-sm focus:outline-none focus:border-ink" />
               </div>
               <div>
                 <label className="block text-xs text-gray-600 mb-1">Age</label>
                 <input required type="number" min={1} max={129} value={newPatient.age} onChange={e => setNewPatient(p => ({ ...p, age: e.target.value }))}
-                  className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+                  className="w-full bg-surface border border-hairline px-3 py-2 text-ink text-sm focus:outline-none focus:border-ink" />
               </div>
               <div>
                 <label className="block text-xs text-gray-600 mb-1">Condition</label>
                 <input value={newPatient.condition} onChange={e => setNewPatient(p => ({ ...p, condition: e.target.value }))}
                   placeholder="e.g. ACL Reconstruction (Post-Op)"
-                  className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+                  className="w-full bg-surface border border-hairline px-3 py-2 text-ink text-sm focus:outline-none focus:border-ink" />
               </div>
               <button type="submit" disabled={adding}
-                className="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white rounded-lg py-2.5 font-medium text-sm flex items-center justify-center gap-2">
+                className="w-full bg-ink hover:bg-signal disabled:opacity-50 text-paper py-2.5 font-medium text-sm flex items-center justify-center gap-2 transition-colors">
                 {adding && <Loader2 className="animate-spin" size={16}/>} Add Patient
               </button>
             </form>
@@ -399,7 +399,7 @@ const PatientDetail = ({ patient, onBack, onStartLive }: { patient: PatientWithS
          </div>
          <button
             onClick={onStartLive}
-            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-blue-900/20 transition-all hover:scale-105"
+            className="flex items-center gap-2 bg-ink hover:bg-signal text-paper px-6 py-3 font-bold transition-colors"
          >
             <Activity size={18} /> Start Live Assessment
          </button>
@@ -411,7 +411,7 @@ const PatientDetail = ({ patient, onBack, onStartLive }: { patient: PatientWithS
          {/* CHART: GAIT SYMMETRY TREND (real recorded sessions) */}
          <GlassCard className="col-span-2 p-6">
              <div className="flex justify-between items-center mb-6">
-                <div className="flex items-center gap-2 text-blue-600 text-xs font-bold uppercase tracking-widest">
+                <div className="flex items-center gap-2 text-signal text-xs font-bold uppercase tracking-widest">
                    <TrendingUp size={14} /> Gait Symmetry Trend (All Recorded Sessions)
                 </div>
                 {symmetryDelta !== null && (
@@ -700,23 +700,23 @@ export default function App() {
 
   // --- RENDER ROUTER ---
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans pb-20">
+    <div className="min-h-screen bg-paper text-ink font-sans pb-20">
 
       {/* GLOBAL NAVBAR */}
-      <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+      <nav className="border-b border-hairline bg-paper/90 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-[1600px] mx-auto px-6 h-16 flex items-center justify-between">
-            <div className="flex items-center gap-3 cursor-pointer" onClick={() => setView('dashboard')}>
-                <div className="w-8 h-8 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg">N</div>
-                <span className="font-bold text-lg">SoleSync <span className="text-blue-500 font-light">Clinical</span></span>
+            <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => setView('dashboard')}>
+                <span className="w-2.5 h-2.5 bg-signal flex-shrink-0" />
+                <span className="font-serif font-medium text-lg text-ink">NurvoSync <span className="text-muted font-normal">Clinical</span></span>
             </div>
 
             {/* If in Live Mode, show connection controls */}
             {view === 'live' && (
               <div className="flex gap-3">
-                 <button onClick={() => setView('patient')} className="mr-4 text-sm text-gray-600 hover:text-gray-900">Exit Session</button>
+                 <button onClick={() => setView('patient')} className="mr-4 text-sm text-muted hover:text-ink">Exit Session</button>
                   {[{side: 'left', active: leftConnected, dropped: leftDropped, hz: signalRate.left}, {side: 'right', active: rightConnected, dropped: rightDropped, hz: signalRate.right}].map((dev: any) => (
                       <button key={dev.side} onClick={() => handleConnect(dev.side)} disabled={dev.active || isConnecting}
-                        className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider border transition-all flex items-center gap-2 ${dev.active ? 'bg-blue-50 border-blue-300 text-blue-700' : dev.dropped ? 'bg-red-50 border-red-300 text-red-600 animate-pulse' : 'border-gray-300 hover:bg-gray-50 text-gray-600'}`}>
+                        className={`px-4 py-2 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center gap-2 ${dev.active ? 'bg-paper border-signal text-signal' : dev.dropped ? 'bg-red-50 border-red-300 text-red-600 animate-pulse' : 'border-hairline hover:border-ink text-muted'}`}>
                           {isConnecting && !dev.active ? <Loader2 className="animate-spin" size={14}/> : dev.active ? <Activity size={14}/> : dev.dropped ? <AlertTriangle size={14}/> : <Bluetooth size={14}/>}
                           {dev.side} {dev.active ? `${dev.hz}Hz` : dev.dropped ? 'Reconnect' : 'Connect'}
                       </button>
@@ -747,9 +747,9 @@ export default function App() {
         <div className="max-w-[1600px] mx-auto px-6 py-8 space-y-6 animate-in fade-in duration-500">
 
            {/* SESSION HEADER */}
-           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-gray-200 rounded-2xl px-6 py-5">
+           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-surface border border-hairline px-6 py-5">
               <div className="flex items-center gap-4">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${isRecording ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+                <div className={`w-12 h-12 flex items-center justify-center transition-colors ${isRecording ? 'bg-red-100 text-red-600' : 'bg-paper text-signal'}`}>
                   <Activity size={22} />
                 </div>
                 <div>
@@ -795,7 +795,7 @@ export default function App() {
            {isRecording && (
              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <GlassCard className="p-4">
-                  <div className="text-[10px] uppercase text-cyan-600 font-bold mb-1">Gait Speed</div>
+                  <div className="text-[10px] uppercase text-signal font-bold mb-1">Gait Speed</div>
                   <div className="text-2xl font-bold text-gray-900">{liveMetrics ? liveMetrics.gaitSpeed.toFixed(2) : '--'}<span className="text-xs text-gray-500 font-normal ml-1">m/s</span></div>
                   <div className="text-[10px] text-gray-500 mt-1">Clinical "6th vital sign"</div>
                 </GlassCard>
@@ -819,11 +819,11 @@ export default function App() {
 
            {/* HERO ROW: the two signals that matter most, front and center */}
            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                <GlassCard className="lg:col-span-2 p-6 flex flex-col items-center justify-center relative min-h-[320px] bg-gradient-to-b from-cyan-50 to-transparent">
-                    <div className="flex items-center gap-2 mb-4 text-cyan-600 self-start"><Activity size={16}/><span className="text-xs font-bold uppercase tracking-widest">Gait Symmetry</span></div>
+                <GlassCard className="lg:col-span-2 p-6 flex flex-col items-center justify-center relative min-h-[320px]">
+                    <div className="flex items-center gap-2 mb-4 text-signal self-start"><Activity size={16}/><span className="text-xs font-bold uppercase tracking-widest">Gait Symmetry</span></div>
                     <div className="flex-1 w-full flex items-center justify-center"><GaitCyclogram leftForce={leftForceTotal} rightForce={rightForceTotal} /></div>
                 </GlassCard>
-                <GlassCard className="lg:col-span-3 p-6 bg-gradient-to-br from-indigo-50 to-blue-50 min-h-[320px]">
+                <GlassCard className="lg:col-span-3 p-6 min-h-[320px]">
                     <AIAnalysis leftPressure={leftPressure} rightPressure={rightPressure} leftRoll={leftOrient.roll} rightRoll={rightOrient.roll} leftAz={leftImu.az} rightAz={rightImu.az} trainedPrediction={trainedPrediction} />
                 </GlassCard>
             </div>
@@ -902,7 +902,7 @@ export default function App() {
             <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40">
                 {!isRecording ? (
                   <button onClick={startWalkTest} disabled={!leftConnected || !rightConnected}
-                    className={`group px-8 py-3 rounded-full font-bold text-sm shadow-xl flex items-center gap-3 overflow-hidden transition-all ${(!leftConnected || !rightConnected) ? 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-70' : 'bg-gray-900 text-white hover:scale-105 shadow-lg'}`}>
+                    className={`group px-8 py-3 rounded-full font-bold text-sm shadow-lg flex items-center gap-3 overflow-hidden transition-colors ${(!leftConnected || !rightConnected) ? 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-70' : 'bg-ink text-paper hover:bg-signal'}`}>
                     {(!leftConnected || !rightConnected) && <AlertTriangle size={16} />}
                     <span className="relative z-10">{(!leftConnected || !rightConnected) ? "Connect Devices First" : "Start Clinical Assessment"}</span>
                   </button>
