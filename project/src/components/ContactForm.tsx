@@ -23,6 +23,7 @@ export default function ContactForm() {
     const payload: Record<string, string> = Object.fromEntries(formData.entries()) as Record<string, string>;
     payload.access_key = WEB3FORMS_ACCESS_KEY;
     payload.subject = 'New pilot request — NurvoSync website';
+    payload.ccemail = 'yashagarwal.29973@gmail.com';
     try {
       const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
