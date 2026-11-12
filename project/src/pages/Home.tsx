@@ -455,8 +455,12 @@ export default function Home() {
                 <span className="block text-muted text-sm mt-1">For hardware and technical questions</span>
               </a>
               <a href="mailto:kssingh2117@gmail.com" className="block border border-hairline p-5 hover:border-signal transition-colors">
-                <span className="text-ink font-medium">Email</span>
+                <span className="text-ink font-medium">Email — Karanjeet</span>
                 <span className="block text-muted text-sm mt-1">kssingh2117@gmail.com</span>
+              </a>
+              <a href="mailto:yashagarwal.29973@gmail.com" className="block border border-hairline p-5 hover:border-signal transition-colors">
+                <span className="text-ink font-medium">Email — Yash</span>
+                <span className="block text-muted text-sm mt-1">yashagarwal.29973@gmail.com</span>
               </a>
             </div>
           </motion.div>
